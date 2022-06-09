@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Shop</title>
-</head>
-<body>
-	<h1>Shop page</h1>
+<?php include('layout/header.php') ?>
+
+
+	<img src="img/banner.jpg" alt="">
 </body>
 </html>
