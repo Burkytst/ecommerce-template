@@ -1,3 +1,7 @@
+<?php 
+    require('../src/config.php');
+    require('../src/dbconnect.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
