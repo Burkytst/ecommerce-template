@@ -27,6 +27,11 @@ nav {
     font-family: 'Montserrat', sans-serif;
 }
 
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
 @media screen and (max-width: 600px) {
     h1 {
@@ -49,4 +54,6 @@ nav {
     box-shadow: 5px 7.5px 12.5px 0 rgba(0,0,0,.2);
 }
 
-
+#wrapper {
+    width: 1200px;
+}
