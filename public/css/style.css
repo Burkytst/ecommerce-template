@@ -6,15 +6,16 @@ body {
 
 h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 96px;
+    font-size: 8vw;
 }
 
 /* HEADER  */
 
 #header {
     margin: 0 auto 0 auto;
-    width: 1200px;
+    width: 100%;
     text-align: center;
+    padding: 0 20px 0 20px;
 }
 
 .red {
@@ -25,6 +26,13 @@ nav {
     text-align: end;
     font-family: 'Montserrat', sans-serif;
 }
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+    h1 {
+      font-size: 15vw;
+    }
+  }
 
 /* INDEX */
 .banner {
@@ -40,3 +48,5 @@ nav {
 .productThumb:hover {
     box-shadow: 5px 7.5px 12.5px 0 rgba(0,0,0,.2);
 }
+
+
