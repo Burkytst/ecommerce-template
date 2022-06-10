@@ -32,3 +32,11 @@ nav {
     margin: 0 auto 0 auto;
     display: block;
 }
+
+.productThumb {
+    box-shadow: 10px 15px 25px 0 rgba(0,0,0,.2);
+}
+
+.productThumb:hover {
+    box-shadow: 5px 7.5px 12.5px 0 rgba(0,0,0,.2);
+}
