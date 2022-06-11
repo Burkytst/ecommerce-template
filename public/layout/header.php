@@ -16,14 +16,18 @@
 <body>
 
 <div id="header">
-    <nav>START CONTACT <a href=""  data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</a></nav>
+    <nav>
+        <a href="index.php">START</a>
+        <a href="contact.php">CONTACT</a>
+        <a href=""  data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</a>
+    </nav>
     <h1>SIBAR<span class="red">SNKR</p></h1>
 </div>
 
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form action="authenticate.php" method="post">
+                <form action="../src/authenticate.php" method="post">
                 <div class="modal-header">
                     <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
                     <h5><a href="register.php">Registrera dig</a></h5>

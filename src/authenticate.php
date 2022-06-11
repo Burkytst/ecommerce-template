@@ -38,7 +38,7 @@ if ($stmt = $con->prepare('SELECT id, password, first_name, last_name FROM users
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $first_name." ".$last_name;
             $_SESSION['id'] = $id;
-            header('Location: home.php');
+            header('Location: ../public/account.php');
         } else {
             // Incorrect password
             echo 'Incorrect email and/or password!';
