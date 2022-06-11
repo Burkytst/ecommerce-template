@@ -21,7 +21,7 @@
         <a href="contact.php">CONTACT</a>
         <a href=""  data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</a>
     </nav>
-    <h1>SIBAR<span class="red">SNKR</p></h1>
+    <h1 class="logo">SIBAR<span class="red">SNKR</p></h1>
 </div>
 
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -30,23 +30,22 @@
                 <form action="../src/authenticate.php" method="post">
                 <div class="modal-header">
                     <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-                    <h5><a href="register.php">Registrera dig</a></h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5">
-                      <i class="fas fa-envelope prefix grey-text"></i>
+                      <label for="email" class="form-label">Email:</label>
                       <input type="text" name="email" placeholder="Your email" id="email" required class="form-control validate">
                     </div>
             
                     <div class="md-form mb-4">
-                      <i class="fas fa-lock prefix grey-text"></i>
+                      <label for="password" class="form-label">Email:</label>
                       <input type="password" name="password" placeholder="Your password" class="form-control validate" id="password" required>
                     </div>
-            
+                    
                   </div>
                   <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-default">Login</button>
+                    <a href="register.php" class="btn btn-default">Create account</a><button class="btn btn-default">Login</button>
                   </div>
                 </form>
               </div>

@@ -6,7 +6,7 @@ body {
 
 h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 8vw;
+    font-size: 98px;
 }
 
 /* HEADER  */
@@ -18,6 +18,9 @@ h1 {
     padding: 0 20px 0 20px;
 }
 
+.logo {
+    font-size: 8vw;
+}
 .red {
     color: #b02e2e;
 }
@@ -25,9 +28,15 @@ h1 {
 nav {
     text-align: end;
     font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px;
 }
 
 nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.modal a {
     text-decoration: none;
     color: black;
 }
