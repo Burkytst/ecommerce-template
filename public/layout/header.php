@@ -19,7 +19,14 @@
     <nav>
         <a href="index.php">START</a>
         <a href="contact.php">CONTACT</a>
-        <a href=""  data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</a>
+        <?php
+            if (!isset($_SESSION['loggedin'])) {
+	            echo '<a href# data-bs-toggle=modal data-bs-target=#loginModal>LOGIN</a>';
+            } else {
+                echo '<a href=../public/account.php>MY PAGE</a> <a href=../src/logout.php>LOGOUT</a>';
+            }
+        ?>
+        
     </nav>
     <h1 class="logo">SIBAR<span class="red">SNKR</p></h1>
 </div>

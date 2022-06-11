@@ -1,11 +1,7 @@
 <?php include('layout/header.php');?>
-<a href="../src/registerValidation.php">Hej</a>
 <div id="wrapper">
-
-
-</div>
-
 <div class="container px-5 my-5">
+    <h2>Get your own account</h2>
     <form action="../src/registerValidation.php" id="regForm" name="regForm" method="post" class="">
         <div class="form-floating mb-3">
             <input class="form-control" id="first_name" name="first_name"type="text" placeholder="First name" data-sb-validations="required" />
@@ -310,5 +306,7 @@
             <button class="btn btn-primary btn-lg" name="regForm" id="submitButton" type="submit">Submit</button>
         </div>
     </form>
+
+</div>
 </div>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
