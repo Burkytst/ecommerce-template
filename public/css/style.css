@@ -36,7 +36,7 @@ p {
 nav {
     text-align: end;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 20px;
+    margin: 20px 0 20px 0;
 }
 
 nav a {
@@ -56,7 +56,7 @@ nav a {
     }
   }
 
-/* INDEX */
+/* INDEX AND CHILD PAGES*/
 .banner {
     width: 100%;
     margin: 0 auto 0 auto;
@@ -72,8 +72,13 @@ nav a {
 }
 
 #wrapper {
-    width: 1200px;
+    width: 900px;
     margin: 0 auto 0 auto;
-    border: 1px solid rgb(189, 189, 189);
     height: 100%;
+}
+
+/* USER PAGES */
+
+.pointsRed {
+    color: #b02e2e;
 }
