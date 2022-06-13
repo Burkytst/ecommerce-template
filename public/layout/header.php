@@ -23,7 +23,7 @@
         <a href="contact.php">CONTACT</a>
         <?php
             if (!isset($_SESSION['loggedin'])) {
-	            echo '<a href# data-bs-toggle=modal data-bs-target=#loginModal>LOGIN</a>';
+	            echo '<a href# data-bs-toggle=modal data-bs-target=#loginModal class="linkEffect">LOGIN</a>';
             } else {
                 echo '<a href=../public/account.php>MY PAGE</a> <a href=../src/logout.php>LOGOUT</a>';
             }
