@@ -34,6 +34,11 @@ $pointsLeft = 2000 - $user['points'];
             <h2>Points</h2>
             <h1 class="pointsRed"><?=htmlentities($user['points'])?></h1>
             <p>Points left to bonus: <?=$pointsLeft?></p>
+
+            <h2>Bonus checks</h2>
+            <b>Value:</b> $50 <b>Valid thru: </b> 2023-03-12<br />
+            <input type="text" value="OKDFUCND2323kfs" style="border: none; background: #abef86;" id="myInput">
+            <i class="fas fa-copy" onclick="myFunction()"></i>
         </div>
     </div>
     <div class="row">    
@@ -73,3 +78,19 @@ $pointsLeft = 2000 - $user['points'];
         </div>
     </div>
 </div>
+<script>
+function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("myInput");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
+</script>
