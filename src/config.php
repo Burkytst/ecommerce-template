@@ -50,6 +50,7 @@ function template_header($title) {
             <h1 class="logo">SIBAR<span class="red">SNKR</p></h1>
         </div>
         
+        
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
