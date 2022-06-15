@@ -1,4 +1,6 @@
-<?php include('layout/header.php');
+<?php
+	require('../src/config.php');
+    require('../src/dbconnect.php');
 
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
@@ -16,7 +18,8 @@ $pointsLeft = 2000 - $user['points'];
 
 ?>
 
-<div id="wrapper">
+<?=template_header('Account')?>
+
     <h1>Account</h1>
     <p>Welcome back, <?=$_SESSION['name']?>!</p>
     <div class="row">

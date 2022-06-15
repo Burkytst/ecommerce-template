@@ -1,5 +1,11 @@
-<?php include('layout/header.php');?>
-<div id="wrapper">
+<?php
+	require('../src/config.php');
+
+?>
+
+<?=template_header('Account')?>
+
+
 <div class="container px-5 my-5">
     <h2>Get your own account</h2>
     <form action="../src/registerValidation.php" id="regForm" name="regForm" method="post" class="">
