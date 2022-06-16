@@ -19,7 +19,7 @@ if ( !isset($_POST['email'], $_POST['password']) ) {
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT id, password, first_name, last_name FROM users WHERE email = ?')) {
+if ($stmt = $con->prepare('SELECT id, password, first_name, last_name, admin FROM users WHERE email = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the email is a string so we use "s"
 	$stmt->bind_param('s', $_POST['email']);
 	$stmt->execute();
@@ -27,7 +27,7 @@ if ($stmt = $con->prepare('SELECT id, password, first_name, last_name FROM users
 	$stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $password, $first_name, $last_name);
+        $stmt->bind_result($id, $password, $first_name, $last_name, $admin);
         $stmt->fetch();
         // Account exists, now we verify the password.
         // Note: remember to use password_hash in your registration file to store the hashed passwords.
@@ -38,7 +38,12 @@ if ($stmt = $con->prepare('SELECT id, password, first_name, last_name FROM users
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $first_name." ".$last_name;
             $_SESSION['id'] = $id;
-            header('Location: ../public/account.php');
+            if ($admin != 0) {
+                header('Location: ../public/admin/index.php'); 
+            } else {
+                header('Location: ../public/account.php');
+            }
+            
         } else {
             // Incorrect password
             echo 'Incorrect email and/or password!';
