@@ -1,20 +1,81 @@
 <?php
 	require('../src/config.php');
     require('../src/dbconnect.php');
+
+
+// ------------------ DELETE, EDIT and ADD BUTTONS ------------------
+
+
+		// DELETE USERS
+
+if(isset($_POST["deleteUser"])){
+ $sql = "DELETE FROM users WHERE id = :id;";
+
+ $stmt = $dbconnect->prepare($sql);
+ $stmt->bindParam(':id', $_POST["userId"]);
+$stmt->execute();
+}
+
+// EDIT USER
+
+
+if(isset($_POST['editUserBtn'])){
+	$sql = "
+	UPDATE users
+	SET first_name = :first_name, last_name = :last_name, email = :email, phone =: phone, street =:street, postal_code =:postal_code, city =:city, country =:country, password =:password, 
+	WHERE id = :id
+	
+	";
+	$stmt = dbconnect->prepare($sql);
+	$stmt -> bindParam(':id', $_GET['editUserId']);
+	$stmt -> bindParam(':first_name', $_POST['first_name']);
+	$stmt -> bindParam(':last_name', $_POST['last_name']);
+	$stmt -> bindParam(':email', $_POST['email']);
+	$stmt -> bindParam(':phone', $_POST['phone']);
+	$stmt -> bindParam(':street', $_POST['street']);
+	$stmt -> bindParam(':postal_code', $_POST['postal_code']);
+	$stmt -> bindParam(':city', $_POST['city']);
+	$stmt -> bindParam(':country', $_POST['country']);
+	$stmt -> bindParam(':password', $_POST['password']);
+	$stmt ->execute();
+
+
+}
+
+
+
+
+// ------------------ FETCH AREA ------------------
+
+// FETCH ALL USERS:
+
+$sql = "SELECT * FROM users;";
+$stmt = $dbconnect->query($sql);
+$users = $stmt->fetchAll();
+
+
+// EDIT USER FETCH:
+
+$fetchOne = "SELECT * FROM users WHERE id = :id;";
+
+$stmt = $dbconnect->prepare($fetchOne);
+$stmt->bindParam(':id', $_GET["editUserId"]);
+$stmt->execute();
+$editUsers = $stmt->fetch();
+
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
+echo "<pre>";
+print_r($users);
+echo "</pre>";
+
 ?>
 
 <?=template_header('Home')?>
 
-
-<?php
-
-if(isset($_GET["delete"])){
- $del_id = $GET["delete"];
- $sql_query = "DELETE FROM products WHERE id = {$del_id}";
- $delete_id_query = mysqli_query($conn,  $sql_query);
-}
-
-?>
+<!-- SIDANS HUVUDSAKLIGA INNEHÅLL -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +84,7 @@ if(isset($_GET["delete"])){
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
@@ -34,31 +96,33 @@ if(isset($_GET["delete"])){
             <h1>User Management System</h1>
             <hr>
 
+
+						<form action="" method="POST">
+																	<input type="hidden" class='id' name="userId" value="">
+																			<input type="submit" class='btn btn-primary' data-toggle='modal' data-target='#add_modal' name="addUser" value="Add User"></form> 
+
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Country</th>
+                        <th>Creation Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 
-
                 
             
                     <tr>
-                        <td>1</td>
-                        <td>Sample Prodcut Title</td>
-                        <td>Sample Description</td>
-                        <td>Price</td>
-                        <td>Stock</td>
-                        <td>Image</td>
-                      
+										<?php foreach($users as $user)  {  ?> 
+											<td><?=htmlentities($user['id'])?></td>
+                        <td><?=htmlentities($user['first_name'])?></td>
+												<td><?=htmlentities($user['email'])?></td>
+												<td><?=htmlentities($user['country'])?></td>
+												<td><?=htmlentities($user['create_date'])?></td>
                        
                         <td>
                             <div class='dropdown'>
@@ -66,15 +130,20 @@ if(isset($_GET["delete"])){
                                     Actions
                                 </button>
                                 <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                                    <a class='dropdown-item' data-toggle='modal' data-target='#edit_modal' href='#'>Edit</a>
+
+																<form action="" method="GET">
+																<input type="hidden" class='id' name="editUserId" value="<?=htmlentities($user['id'])?>">
+																<input type="submit" data-toggle='modal' data-target='#edit_modal' class='dropdown-item' name="editUserBtn" value="Edit"></form>  
+                                
                                     <div class='dropdown-divider'></div>
-                                    <a class='dropdown-item' href='#'>Delete</a>
-                                    <div class='dropdown-divider'></div>
-                                    <a class='dropdown-item' data-toggle='modal' data-target='#add_modal'>Add</a>
-                                </div>
+	
+																	<form action="" method="POST">
+																	<input type="hidden" class='id' name="userId" value="<?=htmlentities($user['id'])?>">
+																			<input type="submit" class='dropdown-item' name="deleteUser" value="Delete"></form>           
                             </div>
                         </td>
                     </tr>
+										<?php } ?>
 
                     <div id="edit_modal" class="modal fade">
                         <div class="modal-dialog" role="document">
@@ -87,35 +156,49 @@ if(isset($_GET["delete"])){
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="product">
+                            
                                         <div class="form-group">
-                                            <label for="id">ID</label>
-                                            <input type="text" class="form-control" name="id">
+                                            <label for="title">First name</label>
+                                            <input type="text" class="form-control" name="first_name" value="<?=htmlentities($editUsers['first_name'])?>">
+                                        </div>
+																				<div class="form-group">
+                                            <label for="title">Last name</label>
+                                            <input type="text" class="form-control" name="last_name" value="<?=htmlentities($editUsers['last_name'])?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="title">Product Title</label>
-                                            <input type="text" class="form-control" name="title">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">Description</label>
-                                            <input type="text" class="form-control" name="description">
+                                            <label for="description">Email</label>
+                                            <input type="text" class="form-control" name="email" value="<?=htmlentities($editUsers['email'])?>">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="price">Price</label>
-                                            <input type="file" class="form-control" name="price">
+                                            <label for="price">Phone</label>
+                                            <input type="text" class="form-control" name="phone" value="<?=htmlentities($editUsers['phone'])?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="stock">Stock</label>
-                                            <input type="text" class="form-control" name="stock">
+                                            <label for="stock">Street</label>
+                                            <input type="text" class="form-control" name="street" value="<?=htmlentities($editUsers['street'])?>">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="image">Image</label>
-                                            <input type="text" class="form-control" name="image">
+																				<div class="form-group">
+                                            <label for="stock">Postal code</label>
+                                            <input type="text" class="form-control" name="postal_code" value="<?=htmlentities($editUsers['postal_code'])?>">
+                                        </div>
+																				<div class="form-group">
+                                            <label for="stock">City</label>
+                                            <input type="text" class="form-control" name="city" value="<?=htmlentities($editUsers['city'])?>">
+                                        </div>
+																				<div class="form-group">
+                                            <label for="stock">Country</label>
+                                            <input type="text" class="form-control" name="country" value="<?=htmlentities($editUsers['country'])?>">
+                                        </div>
+
+																				<div class="form-group">
+                                            <label for="stock">Password</label>
+                                            <input type="text" class="form-control" name="password" value="">
                                         </div>
 
                                         <div class="form-group">
                                             <input type="hidden" name="id" value="">
-                                            <input type="submit" class="btn btn-primary" name="edit_product" value="Edit Product">
+                                            <input type="submit" class="btn btn-primary" name="edit_product" value="Update user">
                                         </div>
                                     </form>
                                 </div>
@@ -123,7 +206,8 @@ if(isset($_GET["delete"])){
                         </div>
                     </div>
                 </tbody>
-            </table>
+            </table> 
+
 
             <div id="add_modal" class="modal fade">
                 <div class="modal-dialog" role="document">
@@ -179,6 +263,10 @@ if(isset($_GET["delete"])){
 
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>
 
 <?=template_footer()?>
