@@ -6,5 +6,7 @@
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
+
+  hej hej hejhej
 }
 
