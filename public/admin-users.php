@@ -52,6 +52,7 @@ $city    = "";
 $country    = "";
 $password  = "";
 $confirmPassword = "";
+$create_date =  "";
 if (isset($_POST['addUserBtn'])) {
     $first_name        = trim($_POST['first_name']);
     $last_name        = trim($_POST['last_name']);
@@ -63,6 +64,7 @@ if (isset($_POST['addUserBtn'])) {
     $country           = trim($_POST['country']);
     $password        = trim($_POST['addPassword']);
     $confirmPassword = trim($_POST['addConfirmPassword']);
+    $create_date = date("Y-m-d h:i:sa");
 
 
 echo "<pre>";
@@ -78,30 +80,28 @@ echo "</pre>";
         ';
     } else { 
         
-        $sql = " INSERT INTO users (first_name, last_name, email, phone, street, postal_code, city, country, password)
-        VALUES (:first_name, :last_name, :email, :phone :street, :postal_code, :city, :country, :addPassword);
+        $sql = " INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country, create_date)
+        VALUES (:first_name, :last_name, :email, :password :phone :street, :postal_code, :city, :country :create_date);
     ";
 
     $stmt = $dbconnect->prepare($sql);
     $stmt -> bindParam(':first_name', $first_name);
     $stmt -> bindParam(':last_name', $last_name);
     $stmt -> bindParam(':email', $email);
+    $stmt -> bindParam(':password', $password);
     $stmt -> bindParam(':phone', $phone);
     $stmt -> bindParam(':street', $street);
     $stmt -> bindParam(':postal_code', $postal_code);
     $stmt -> bindParam(':city', $city);
     $stmt -> bindParam(':country', $country);
-    $stmt -> bindParam(':password', $password);
-    $stmt->execute();
+    $stmt -> bindParam(':create_date', $create_date);
+    $stmt -> execute();
 
     echo "<pre>";
     print_r("hatt");
     echo "</pre>"; 
 
 }
-
-
-
 }
  
   
