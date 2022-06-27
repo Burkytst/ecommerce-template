@@ -36,6 +36,11 @@ if(isset($_POST['updateUserBtn'])){
 	$stmt -> bindParam(':password', $_POST['password']);
 	$stmt ->execute();
 
+
+    echo "<pre>";
+    print_r("hej");
+    echo "</pre>";
+
 }
 
 
@@ -155,7 +160,7 @@ echo "</pre>";
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="product">
+                                    <form action="" method="POST">
                             
                                         <div class="form-group">
                                             <label for="title">First name</label>
@@ -193,11 +198,16 @@ echo "</pre>";
 
 																				<div class="form-group">
                                             <label for="stock">Password</label>
-                                            <input type="text" class="form-control" name="password" value="<?=htmlentities($editUsers['password'])?>">
+                                            <input type="password" class="form-control" name="password">
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="hidden" name="updateId" value="<?=htmlentities($editUsers['id'])?>">
+                                            <label for="confirm-password">Confirm Password</label>
+                                            <input type="password" class="form-control" name="confirmPassword">
+                                        </div>
+
+                                        <div class="form-group">
+
                                             <input type="submit" class="btn btn-primary" name="updateUserBtn" value="Update User">
                                         </div>
                                     </form>
