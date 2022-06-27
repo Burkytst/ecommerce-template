@@ -14,13 +14,20 @@ define('IMG_PATH', '../public/img/');          // path to "img"-folder
 
 
 function template_header($title) {
-
+    
    
     if (!isset($_SESSION['loggedin'])) {
         $menuVar = '<a href# data-bs-toggle=modal data-bs-target=#loginModal class="linkEffect">LOGIN</a>';
     } else {
         $menuVar =  '<a href=../public/account.php>MY PAGE</a> <a href=../src/logout.php>LOGOUT</a>';
     }
+
+
+    $num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+    $cart = "<div class=cart_div><a href=cart.php><img src=img/cart-icon.png /><span>$num_items_in_cart</span></a></div>";
+
+
+    
 
     echo <<<EOT
 
@@ -44,10 +51,10 @@ function template_header($title) {
             <nav>
                 <a href="index.php">START</a>
                 <a href="contact.php">CONTACT</a>
-                {$menuVar}
-            
+                {$menuVar} 
+                {$cart}         
             </nav>
-            <h1 class="logo">SIBAR<span class="red">SNKR</p></h1>
+            <a href="index.php" class="logo"><h1 class="logo">SIBAR<span class="red">SNKR</p></h1></a>
         </div>
         
         

@@ -12,7 +12,7 @@ $products = $stmt->fetchAll();
 <div class="row">
 	<?php foreach($products as $product) { ?>
 		<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-			<a href="#">
+			<a href="product.php?id=<?=htmlentities($product['id'])?>">
 				<img src="img/products/<?=$product['img_url']?>" class="productThumb w-100 shadow-1-strong rounded mb-4">
 			</a>
 		</div>

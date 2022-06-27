@@ -28,6 +28,12 @@ p {
 
 .logo {
     font-size: 8vw;
+    color: black;
+    text-decoration: none !important;
+}
+
+.logo a {
+    text-decoration: none !important;
 }
 
 .red {
@@ -52,7 +58,32 @@ nav a {
 
 .linkEffect {
     cursor: pointer;
+    text-decoration: none;
 }
+
+.cart_div {
+	float:right;
+	font-weight:bold;
+	position:relative;
+	}
+.cart_div a {
+	color:#000;
+	}	
+.cart_div span {
+	font-size: 12px;
+	line-height: 14px;
+	background: #F68B1E;
+	padding: 2px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	top: -1px;
+	left: 13px;
+	color: #fff;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	}
 
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
 @media screen and (max-width: 600px) {
@@ -82,8 +113,15 @@ nav a {
     height: 100%;
 }
 
+.productImg {
+    width: 550px;
+
+}
+
 /* USER PAGES */
 
 .pointsRed {
     color: #b02e2e;
 }
+
+
