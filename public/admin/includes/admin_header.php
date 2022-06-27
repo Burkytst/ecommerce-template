@@ -10,9 +10,9 @@
     <meta name="author" content="">
 
     <title>Admin Page</title>
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
   </head>
 

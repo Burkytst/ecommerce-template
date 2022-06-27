@@ -1,13 +1,15 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $host 	  = 'localhost';
 $database = 'webshop';
 $user     = 'root';
-$password = 'root';
+$password = '';
 $charset  = 'utf8mb4';
 
-$dns 	  = "mysql:host={$host};dbname={$database};charset={$charset}";
-
+//$dns 	  = "mysql:host={$host};dbname={$database};charset={$charset}";
 // För MAMP, så kan dns se lite olika ut
 //$dns 	  = "mysql:unix_socket=/Application/MAMP/tmp/mysql/mysql.sock;dbname={$database}";
 
@@ -27,7 +29,9 @@ $options = [
 // Upprätta en DB koppling
 try {
 	// Försök köra koden i try-blocket
-	$dbconnect = new PDO($dns, $user, $password, $options);
+//	$dbconnect = new PDO($dns, $user, $password, $options);
+	$con = mysqli_connect($host, $user, $password, $database);
+
 } catch (\PDOException $e) {
 	// Catch-blocket körs om något gick fel i try-blocket
 	// echo $e->getMessage();
