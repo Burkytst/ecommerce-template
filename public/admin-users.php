@@ -67,13 +67,12 @@ echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-echo "<pre>";
-print_r($users);
-echo "</pre>";
-
 ?>
 
 <?=template_header('Home')?>
+
+
+
 
 <!-- SIDANS HUVUDSAKLIGA INNEHÅLL -->
 
