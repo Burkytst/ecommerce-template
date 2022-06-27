@@ -40,33 +40,75 @@ if(isset($_POST['updateUserBtn'])){
 
 // ADD USER
 
-$message = "hej";
-if(isset($_POST['addUserBtn'])){
-    if ($_POST['addPassword'] !== $_POST['addConfirmPassword']){
-        $message = ' <div class="error_msg"> Confirmed password incorrect!</div>';}
-    else{
-        $sql = "INSERT INTO users (first_name, last_name, email, phone, street, postal_code, city, country, password)
-        VALUES (:first_name, :last_name, :email, :email, :phone :street, :postal_code, :city, :country, :addPassword)";
-        $stmt = $dbconnect->prepare($sql);
-        $stmt -> bindParam(':first_name', $_POST['first_name']);
-        $stmt -> bindParam(':last_name', $_POST['last_name']);
-        $stmt -> bindParam(':email', $_POST['email']);
-        $stmt -> bindParam(':phone', $_POST['phone']);
-        $stmt -> bindParam(':street', $_POST['street']);
-        $stmt -> bindParam(':postal_code', $_POST['postal_code']);
-        $stmt -> bindParam(':city', $_POST['city']);
-        $stmt -> bindParam(':country', $_POST['country']);
-        $stmt -> bindParam(':password', $_POST['addPassword']);
-        $stmt ->execute();
 
+$message  = "";
+$first_name = "";
+$last_name = "";
+$email    = "";
+$phone    = "";
+$street    = "";
+$postal_code    = "";
+$city    = "";
+$country    = "";
+$password  = "";
+$confirmPassword = "";
+if (isset($_POST['addUserBtn'])) {
+    $first_name        = trim($_POST['first_name']);
+    $last_name        = trim($_POST['last_name']);
+    $email           = trim($_POST['email']);
+    $phone           = trim($_POST['phone']);
+    $street           = trim($_POST['street']);
+    $postal_code           = trim($_POST['postal_code']);
+    $city           = trim($_POST['city']);
+    $country           = trim($_POST['country']);
+    $password        = trim($_POST['addPassword']);
+    $confirmPassword = trim($_POST['addConfirmPassword']);
+
+
+echo "<pre>";
+print_r("röv");
+echo "</pre>";
+
+
+    if ($password !== $confirmPassword) {
+        $message = '
+            <div class="error_msg">
+                Confirmed password incorrect!
+            </div>
+        ';
+    } else { 
+        
+        $sql = " INSERT INTO users (first_name, last_name, email, phone, street, postal_code, city, country, password)
+        VALUES (:first_name, :last_name, :email, :phone :street, :postal_code, :city, :country, :addPassword);
+    ";
+
+    $stmt = $dbconnect->prepare($sql);
+    $stmt -> bindParam(':first_name', $first_name);
+    $stmt -> bindParam(':last_name', $last_name);
+    $stmt -> bindParam(':email', $email);
+    $stmt -> bindParam(':phone', $phone);
+    $stmt -> bindParam(':street', $street);
+    $stmt -> bindParam(':postal_code', $postal_code);
+    $stmt -> bindParam(':city', $city);
+    $stmt -> bindParam(':country', $country);
+    $stmt -> bindParam(':password', $password);
+    $stmt->execute();
 
     echo "<pre>";
-    print_r("hej");
-    echo "</pre>";
-
-    }
+    print_r("hatt");
+    echo "</pre>"; 
 
 }
+
+
+
+}
+ 
+  
+
+
+
+
 
 
 // ------------------ FETCH AREA ------------------
@@ -261,50 +303,50 @@ echo "</pre>";
                             <div class="form-group">
 
                                             <label for="title">First name</label>
-                                            <input type="text" class="form-control" name="first_name" value="">
+                                            <input type="text" class="form-control" name="first_name" value="<?=htmlentities($first_name) ?>">
                                         </div>
 																				<div class="form-group">
                                             <label for="title">Last name</label>
-                                            <input type="text" class="form-control" name="last_name" value="">
+                                            <input type="text" class="form-control" name="last_name" value="<?=htmlentities($last_name) ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Email</label>
-                                            <input type="text" class="form-control" name="email" value="">
+                                            <input type="text" class="form-control" name="email" value="<?=htmlentities($email) ?>">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="price">Phone</label>
-                                            <input type="text" class="form-control" name="phone" value="">
+                                            <input type="text" class="form-control" name="phone" value="<?=htmlentities($phone) ?>">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="stock">Street</label>
-                                            <input type="text" class="form-control" name="street" value="">
+                                            <input type="text" class="form-control" name="street" value="<?=htmlentities($street) ?>">
                                         </div>
                                        
 																				
                                         <div class="form-group">
                                             <label for="stock">Postal code</label>
-                                            <input type="text" class="form-control" name="postal_code" value="">
+                                            <input type="text" class="form-control" name="postal_code" value="<?=htmlentities($postal_code) ?>">
                                         </div>
 																				
                                         <div class="form-group">
                                             <label for="stock">City</label>
-                                            <input type="text" class="form-control" name="city" value="">
+                                            <input type="text" class="form-control" name="city" value="<?=htmlentities($city) ?>">
                                         </div>
 																				<div class="form-group">
                                             <label for="stock">Country</label>
-                                            <input type="text" class="form-control" name="country" value="">
+                                            <input type="text" class="form-control" name="country" value="<?=htmlentities($country) ?>">
                                         </div>
 
 																				<div class="form-group">
                                             <label for="stock">Password</label>
-                                            <input type="password" class="form-control" name="addPassword">
+                                            <input type="password" class="form-control" name="addPassword" value="<?=htmlentities($password) ?>">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="confirm-password">Confirm Password</label>
-                                            <input type="password" class="form-control" name="addConfirmPassword">
+                                            <input type="password" class="form-control" name="addConfirmPassword" value="<?=htmlentities($confirmPassword) ?>">
                                         </div>
 
                                         <div class="form-group">
