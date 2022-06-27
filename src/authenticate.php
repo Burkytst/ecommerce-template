@@ -1,12 +1,20 @@
 <?php
 session_start();
 // Change this to your connection info.
+<<<<<<< HEAD
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = 'root';
 $DATABASE_NAME = 'webshop';
+=======
+// $DATABASE_HOST = 'localhost';
+// $DATABASE_USER = 'root';
+// $DATABASE_PASS = '';
+// $DATABASE_NAME = 'webshop';
+require('../src/dbconnect.php');
+>>>>>>> bf54c340086fac4ec9f5cce59be7473ae1dab29b
 // Try and connect using the info above.
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+//$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if ( mysqli_connect_errno() ) {
 	// If there is an error with the connection, stop the script and display the error.
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());

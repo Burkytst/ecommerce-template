@@ -1,6 +1,16 @@
 <?php
-	require('../src/config.php');
-    require('../src/dbconnect.php');
+	require('../../src/config.php');
+    require('../../src/dbconnect.php');
+
+    if (mysqli_connect_errno()) {
+		echo "Err " . $con->connect_error;
+		exit();
+	}
+
+	$sql = "SELECT * FROM products";
+	$products = $con->query($sql);
+	$products->fetch_all(MYSQLI_ASSOC);
+
 ?>
 
 <?php include "includes/admin_header.php"; ?>
@@ -8,18 +18,6 @@
     <div id="wrapper">
 
 <?php include "includes/admin_sidebar.php"; ?>
-
-
-
-<?php
-
-if(isset($_GET["delete"])){
- $del_id = $GET["delete"];
- $sql_query = "DELETE FROM products WHERE id = {$del_id}";
- $delete_id_query = mysqli_query($conn,  $sql_query);
-}
-
-?>
 
 
     <div id="content-wrapper">
@@ -37,20 +35,23 @@ if(isset($_GET["delete"])){
                         <th>Stock</th>
                         <th>Image</th>
                         <th>Actions</th>
+                        <th>
+                                    <button class='btn btn-primary' data-toggle='modal' data-target='#add_modal'>Add Product</button>
+                                                    </th>
                     </tr>
                 </thead>
                 <tbody>
 
 
-                
+                <?php foreach($products as $product) { ?>
             
                     <tr>
-                        <td>1</td>
-                        <td>Sample Prodcut Title</td>
-                        <td>Sample Description</td>
-                        <td>Price</td>
-                        <td>Stock</td>
-                        <td>Image</td>
+                        <td><?=$product['id']?></td>
+                        <td><?=$product['title']?></td>
+                        <td><?=$product['description']?></td>
+                        <td><?=$product['price']?></td>
+                        <td><?=$product['stock']?></td>
+                        <td><?=$product['img_url']?></td>
                       
                        
                         <td>
@@ -59,17 +60,42 @@ if(isset($_GET["delete"])){
                                     Actions
                                 </button>
                                 <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                                    <a class='dropdown-item' data-toggle='modal' data-target='#edit_modal' href='#'>Edit</a>
+                                    <a class='dropdown-item' data-toggle='modal' data-target="#edit_modal<?=$product['id']?>">Edit</a>
                                     <div class='dropdown-divider'></div>
-                                    <a class='dropdown-item' href='#'>Delete</a>
-                                    <div class='dropdown-divider'></div>
-                                    <a class='dropdown-item' data-toggle='modal' data-target='#add_modal'>Add</a>
+                                    <a class='dropdown-item' data-toggle='modal' data-target="#delete_modal<?=$product['id']?>">Delete</a>
                                 </div>
                             </div>
                         </td>
                     </tr>
+                    <div id="delete_modal<?=$product['id']?>" class="modal fade">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="id">Are you sure?</label>
+                                            <input type="hidden" class="form-control" readonly name="id" value="<?=$product['id']?>">
+                                            <input type="hidden" name="form_type" value="delete">
 
-                    <div id="edit_modal" class="modal fade">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" name="delete_product" value="yes">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">no </button>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="edit_modal<?=$product['id']?>" class="modal fade">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -79,42 +105,46 @@ if(isset($_GET["delete"])){
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="product">
+                                    <form method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="id">ID</label>
-                                            <input type="text" class="form-control" name="id">
+                                            <input type="text" class="form-control" readonly name="id" value="<?=$product['id']?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="title">Product Title</label>
-                                            <input type="text" class="form-control" name="title">
+                                            <input type="text" class="form-control" name="title" value="<?=$product['title']?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description</label>
-                                            <input type="text" class="form-control" name="description">
+                                            <input type="text" class="form-control" name="description" value="<?=$product['description']?>">
                                         </div>
-
                                         <div class="form-group">
                                             <label for="price">Price</label>
-                                            <input type="file" class="form-control" name="price">
+                                            <input type="text" class="form-control" name="price" value="<?=$product['price']?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="text" class="form-control" name="stock">
+                                            <input type="text" class="form-control" name="stock" value="<?=$product['stock']?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="image">Image</label>
-                                            <input type="text" class="form-control" name="image">
+                                            <input type="file" class="form-control" name="image">
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="hidden" name="id" value="">
+                                        <input type="hidden" name="form_type" value="edit">
                                             <input type="submit" class="btn btn-primary" name="edit_product" value="Edit Product">
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="formInfo<?=$product['id']?>" class=" hide alert"></div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                 </tbody>
             </table>
 
@@ -129,10 +159,6 @@ if(isset($_GET["delete"])){
                         </div>
                         <div class="modal-body">
                             <form action="" method="product">
-                            <div class="form-group">
-                                            <label for="id">ID</label>
-                                            <input type="text" class="form-control" name="id">
-                                        </div>
                                         <div class="form-group">
                                             <label for="title">Product Title</label>
                                             <input type="text" class="form-control" name="title">
@@ -144,7 +170,7 @@ if(isset($_GET["delete"])){
 
                                         <div class="form-group">
                                             <label for="price">Price</label>
-                                            <input type="file" class="form-control" name="price">
+                                            <input type="text" class="form-control" name="price">
                                         </div>
                                         <div class="form-group">
                                             <label for="stock">Stock</label>
@@ -152,11 +178,11 @@ if(isset($_GET["delete"])){
                                         </div>
                                         <div class="form-group">
                                             <label for="image">Image</label>
-                                            <input type="text" class="form-control" name="image">
+                                            <input type="file" class="form-control" name="image">
                                         </div>
 
                                 <div class="form-group">
-                                    <input type="hidden" name="id" value="">
+                                    <input type="hidden" name="form_type" value="add">
                                     <input type="submit" class="btn btn-primary" name="add_product" value="Add Product">
                                 </div>
                             </form>
@@ -166,6 +192,91 @@ if(isset($_GET["delete"])){
             </div>
             
           
+<script>
+    if(window !==undefined){
+        window.addEventListener('submit',function(e){
+            if(e.submitter.name === "edit_product"){
+                e.preventDefault();
+                fetch('productsDb.php', {
+                    method: 'POST',
+                    body: new FormData(e.target),
+                }).then(function (response) {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }).then(function (data) {
+                    if(data!==0){
+                        document.getElementById("formInfo"+data).classList.add("alert-success");
+                        document.getElementById("formInfo"+data).innerText="Updated";
+                        document.getElementById("formInfo"+data).classList.remove("hide","alert-danger");
+                    }else{
+                        document.getElementById("formInfo"+data).classList.add("alert-danger");
+                        document.getElementById("formInfo"+data).innerText="Error";
+                        document.getElementById("formInfo"+data).classList.remove("hide","alert-success");
+                    }
+                }).catch(function (error) {
+                    console.warn(error);
+                });
 
+                window.addEventListener("click",function(event){
+                    event.preventDefault();
+                    
+                    console.log("mesut---",event.target.classList.value);
+                if(event.target.classList.contains("fade") || event.target.classList.value==""){
+                    location.reload(true)
+                }
+                })
+
+
+            }
+            if(e.submitter.name==="delete_product"){
+                e.preventDefault();
+                fetch('productsDb.php', {
+                    method: 'POST',
+                    body: new FormData(e.target),
+                }).then(function (response) {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }).then(function (data) {
+                    if(data!==0){
+                        location.reload(true)
+                    }
+                }).catch(function (error) {
+                    console.warn(error);
+                });
+                
+            }
+            if(e.submitter.name==="add_product"){
+                e.preventDefault();
+                fetch('productsDb.php', {
+                    method: 'POST',
+                    body: new FormData(e.target),
+                }).then(function (response) {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }).then(function (data) {
+                    if(data!==0){
+                        location.reload(true)
+                    }
+                }).catch(function (error) {
+                    console.warn(error);
+                });
+                
+            }
+		
+	})
+//modal close
+
+
+
+    }
+
+
+</script>
 
             <?php include "includes/admin_footer.php"; ?>
