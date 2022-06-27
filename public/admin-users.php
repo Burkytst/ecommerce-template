@@ -22,7 +22,7 @@ $stmt->execute();
 
 if(isset($_POST['updateUserBtn'])){
 	$sql = "UPDATE users
-	SET first_name = :first_name, last_name = :last_name, email = :email, phone =:phone, street =:street, postal_code =:postal_code, city =:city, country =:country, password =:password WHERE id = :id";
+	SET first_name = :first_name, last_name = :last_name, email = :email, phone =:phone, street =:street, postal_code =:postal_code, city =:city, country =:country, updatePassword =:password WHERE id = :id";
 	$stmt = $dbconnect->prepare($sql);
 	$stmt -> bindParam(':id', $_GET['editUserId']);
 	$stmt -> bindParam(':first_name', $_POST['first_name']);
@@ -33,13 +33,38 @@ if(isset($_POST['updateUserBtn'])){
 	$stmt -> bindParam(':postal_code', $_POST['postal_code']);
 	$stmt -> bindParam(':city', $_POST['city']);
 	$stmt -> bindParam(':country', $_POST['country']);
-	$stmt -> bindParam(':password', $_POST['password']);
+	$stmt -> bindParam(':password', $_POST['updatePassword']);
 	$stmt ->execute();
+
+}
+
+// ADD USER
+
+$message = "hej";
+if(isset($_POST['addUserBtn'])){
+    if ($_POST['addPassword'] !== $_POST['addConfirmPassword']){
+        $message = ' <div class="error_msg"> Confirmed password incorrect!</div>';}
+    else{
+        $sql = "INSERT INTO users (first_name, last_name, email, phone, street, postal_code, city, country, password)
+        VALUES (:first_name, :last_name, :email, :email, :phone :street, :postal_code, :city, :country, :addPassword)";
+        $stmt = $dbconnect->prepare($sql);
+        $stmt -> bindParam(':first_name', $_POST['first_name']);
+        $stmt -> bindParam(':last_name', $_POST['last_name']);
+        $stmt -> bindParam(':email', $_POST['email']);
+        $stmt -> bindParam(':phone', $_POST['phone']);
+        $stmt -> bindParam(':street', $_POST['street']);
+        $stmt -> bindParam(':postal_code', $_POST['postal_code']);
+        $stmt -> bindParam(':city', $_POST['city']);
+        $stmt -> bindParam(':country', $_POST['country']);
+        $stmt -> bindParam(':password', $_POST['addPassword']);
+        $stmt ->execute();
 
 
     echo "<pre>";
     print_r("hej");
     echo "</pre>";
+
+    }
 
 }
 
@@ -63,9 +88,7 @@ $users = $stmt->fetchAll();
     $stmt->execute();
     $editUsers = $stmt->fetch();
  
-
-
-echo "<pre>";
+    echo "<pre>";
 print_r($_GET);
 echo "</pre>";
 
@@ -84,7 +107,7 @@ echo "</pre>";
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>User Management System</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -93,14 +116,15 @@ echo "</pre>";
 
 
 <div id="content-wrapper">
-        <div class="container-fluid">
-            <h1>User Management System</h1>
-            <hr>
+    <div class="container-fluid">
+     <h1>User Management System</h1>
+     <hr>
 
 
-						<form action="#add_modal" method="POST">
-																	<input type="hidden" class='id' name="userId" value="">
-																			<input type="submit" class='btn btn-primary' data-toggle='modal' data-target='#add_modal' name="addUser" value="Add User"></form> 
+					<form action="#add_modal" method="GET">
+					<input type="hidden" class='id' name="userId" value="">
+					<input type="submit" class='btn btn-primary' data-toggle='modal' data-target='#add_modal' name="addUser" value="Add User">
+                    </form> 
 
             <table class="table table-bordered">
                 <thead class="thead-dark">
@@ -161,6 +185,8 @@ echo "</pre>";
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
+
+                                    <?=$message ?>
                             
                                         <div class="form-group">
                                             <label for="title">First name</label>
@@ -198,12 +224,12 @@ echo "</pre>";
 
 																				<div class="form-group">
                                             <label for="stock">Password</label>
-                                            <input type="password" class="form-control" name="password">
+                                            <input type="password" class="form-control" name="updatePassword">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="confirm-password">Confirm Password</label>
-                                            <input type="password" class="form-control" name="confirmPassword">
+                                            <input type="password" class="form-control" name="updateConfirmPassword">
                                         </div>
 
                                         <div class="form-group">
@@ -225,42 +251,65 @@ echo "</pre>";
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+                          
                         </div>
                         <div class="modal-body">
-                            <form action="" method="product">
+                            <form action="" method="POST">
                             <div class="form-group">
-                                            <label for="id">ID</label>
-                                            <input type="text" class="form-control" name="id">
+                            <?=$message ?>
+                            <div class="form-group">
+
+                                            <label for="title">First name</label>
+                                            <input type="text" class="form-control" name="first_name" value="">
+                                        </div>
+																				<div class="form-group">
+                                            <label for="title">Last name</label>
+                                            <input type="text" class="form-control" name="last_name" value="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="title">Product Title</label>
-                                            <input type="text" class="form-control" name="title">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">Description</label>
-                                            <input type="text" class="form-control" name="description">
+                                            <label for="description">Email</label>
+                                            <input type="text" class="form-control" name="email" value="">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="price">Price</label>
-                                            <input type="file" class="form-control" name="price">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="stock">Stock</label>
-                                            <input type="text" class="form-control" name="stock">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="image">Image</label>
-                                            <input type="text" class="form-control" name="image">
+                                            <label for="price">Phone</label>
+                                            <input type="text" class="form-control" name="phone" value="">
                                         </div>
 
-                                <div class="form-group">
-                                    <input type="hidden" name="id" value="">
-                                    <input type="submit" class="btn btn-primary" name="add_product" value="Add Product">
+                                        <div class="form-group">
+                                            <label for="stock">Street</label>
+                                            <input type="text" class="form-control" name="street" value="">
+                                        </div>
+                                       
+																				
+                                        <div class="form-group">
+                                            <label for="stock">Postal code</label>
+                                            <input type="text" class="form-control" name="postal_code" value="">
+                                        </div>
+																				
+                                        <div class="form-group">
+                                            <label for="stock">City</label>
+                                            <input type="text" class="form-control" name="city" value="">
+                                        </div>
+																				<div class="form-group">
+                                            <label for="stock">Country</label>
+                                            <input type="text" class="form-control" name="country" value="">
+                                        </div>
+
+																				<div class="form-group">
+                                            <label for="stock">Password</label>
+                                            <input type="password" class="form-control" name="addPassword">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="confirm-password">Confirm Password</label>
+                                            <input type="password" class="form-control" name="addConfirmPassword">
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <input type="submit" class="btn btn-primary" name="addUserBtn" value="Add User">
                                 </div>
                             </form>
                         </div>
