@@ -19,14 +19,11 @@ $stmt->execute();
 // EDIT USER
 
 
-if(isset($_POST['editUserBtn'])){
-	$sql = "
-	UPDATE users
-	SET first_name = :first_name, last_name = :last_name, email = :email, phone =: phone, street =:street, postal_code =:postal_code, city =:city, country =:country, password =:password, 
-	WHERE id = :id
-	
-	";
-	$stmt = dbconnect->prepare($sql);
+
+if(isset($_POST['updateUserBtn'])){
+	$sql = "UPDATE users
+	SET first_name = :first_name, last_name = :last_name, email = :email, phone =:phone, street =:street, postal_code =:postal_code, city =:city, country =:country, password =:password WHERE id = :id";
+	$stmt = $dbconnect->prepare($sql);
 	$stmt -> bindParam(':id', $_GET['editUserId']);
 	$stmt -> bindParam(':first_name', $_POST['first_name']);
 	$stmt -> bindParam(':last_name', $_POST['last_name']);
@@ -39,10 +36,7 @@ if(isset($_POST['editUserBtn'])){
 	$stmt -> bindParam(':password', $_POST['password']);
 	$stmt ->execute();
 
-
 }
-
-
 
 
 // ------------------ FETCH AREA ------------------
@@ -56,15 +50,18 @@ $users = $stmt->fetchAll();
 
 // EDIT USER FETCH:
 
-$fetchOne = "SELECT * FROM users WHERE id = :id;";
 
-$stmt = $dbconnect->prepare($fetchOne);
-$stmt->bindParam(':id', $_GET["editUserId"]);
-$stmt->execute();
-$editUsers = $stmt->fetch();
+    $fetchOne = "SELECT * FROM users WHERE id = :id;";
+
+    $stmt = $dbconnect->prepare($fetchOne);
+    $stmt->bindParam(':id', $_GET["editUserId"]);
+    $stmt->execute();
+    $editUsers = $stmt->fetch();
+ 
+
 
 echo "<pre>";
-print_r($_POST);
+print_r($_GET);
 echo "</pre>";
 
 ?>
@@ -96,7 +93,7 @@ echo "</pre>";
             <hr>
 
 
-						<form action="" method="POST">
+						<form action="#add_modal" method="POST">
 																	<input type="hidden" class='id' name="userId" value="">
 																			<input type="submit" class='btn btn-primary' data-toggle='modal' data-target='#add_modal' name="addUser" value="Add User"></form> 
 
@@ -130,7 +127,7 @@ echo "</pre>";
                                 </button>
                                 <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
 
-																<form action="" method="GET">
+																<form action="#edit_modal" method="GET">
 																<input type="hidden" class='id' name="editUserId" value="<?=htmlentities($user['id'])?>">
 																<input type="submit" data-toggle='modal' data-target='#edit_modal' class='dropdown-item' name="editUserBtn" value="Edit"></form>  
                                 
@@ -143,6 +140,10 @@ echo "</pre>";
                         </td>
                     </tr>
 										<?php } ?>
+
+
+
+                                        <!-- EDIT USER MODAL -->
 
                     <div id="edit_modal" class="modal fade">
                         <div class="modal-dialog" role="document">
@@ -192,12 +193,12 @@ echo "</pre>";
 
 																				<div class="form-group">
                                             <label for="stock">Password</label>
-                                            <input type="text" class="form-control" name="password" value="">
+                                            <input type="text" class="form-control" name="password" value="<?=htmlentities($editUsers['password'])?>">
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="hidden" name="id" value="">
-                                            <input type="submit" class="btn btn-primary" name="edit_product" value="Update user">
+                                            <input type="hidden" name="updateId" value="<?=htmlentities($editUsers['id'])?>">
+                                            <input type="submit" class="btn btn-primary" name="updateUserBtn" value="Update User">
                                         </div>
                                     </form>
                                 </div>
@@ -207,6 +208,8 @@ echo "</pre>";
                 </tbody>
             </table> 
 
+
+            <!-- ADD USER MODAL -->
 
             <div id="add_modal" class="modal fade">
                 <div class="modal-dialog" role="document">
