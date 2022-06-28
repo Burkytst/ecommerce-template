@@ -25,6 +25,7 @@
 
 				<img src="img/products/<?=$product['img_url']?>" class="productThumb w-100 shadow-1-strong rounded mb-4">
 				<h3><?=$product["title"]?></h3>
+				<h3><?=$product["description"]?></h3>
 			    <h3><?=$product["price"]?></h3>
 			    <h3><?=$product["stock"]?></h3>
 			</a>
