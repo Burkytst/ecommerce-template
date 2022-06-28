@@ -2,6 +2,8 @@
 	require('../../src/config.php');
     require('../../src/dbconnect.php');
 
+    
+
 
 // ------------------ DELETE, EDIT and ADD BUTTONS ------------------
 
@@ -171,13 +173,10 @@ $users = $stmt->fetchAll();
     $stmt->execute();
     $editUsers = $stmt->fetch();
  
-    echo "<pre>";
-print_r($_GET);
+
 echo "</pre>";
 
 ?>
-
-
 <?php include "includes/admin_header.php"; ?>
 
 <?php include "includes/admin_sidebar.php"; ?>
