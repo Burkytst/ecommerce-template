@@ -22,7 +22,7 @@ $DATABASE_PASS = 'root';
 $DATABASE_NAME = 'webshop';
 // Try and connect using the info above.
 $db = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if ( mysqli_connect_errno() ) {
+if ( mysqli_connect_error() ) {
 	// If there is an error with the connection, stop the script and display the error.
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
@@ -54,6 +54,8 @@ if (isset($_POST['regForm'])) {
 	array_push($errors, "The two passwords do not match");
   }
 
+
+
   // first check the database to make sure 
   // a user does not already exist with the same username and/or email
   $user_check_query = "SELECT * FROM users WHERE email='$email' LIMIT 1";
@@ -63,21 +65,34 @@ if (isset($_POST['regForm'])) {
     if ($user['email'] === $email) {
       array_push($errors, "email already exists");
     }
-
+  echo '<pre>'; print_r($errors); echo '</pre>';
 
   // Finally, register user if there are no errors in the form
-  if (count($errors) == 0) {
+  // if (count($errors) == 0) {
     
   	$password    = password_hash($password_1, PASSWORD_DEFAULT);//encrypt the password before saving in the database
     $create_date = date("Y/m/d");
   
-  	$query = "INSERT INTO users (phone, email, password, first_name, last_name, street, postal_code, city, country, create_date) 
-  			  VALUES('$phone', '$email', '$password', '$first_name', '$last_name', '$street', '$postal_code', '$city', '$country', '$create_date')";
-  	mysqli_query($db, $query);
+  	$query = "INSERT INTO users (phone, email, password, first_name, last_name, street, postal_code, city, country, create_date, admin) 
+  			  VALUES('$phone', '$email', '$password', '$first_name', '$last_name', '$street', '$postal_code', '$city', '$country', '$create_date', 1)";
+
+    $stmt = $db->prepare($query);
+    $stmt -> bindParam(':first_name', $first_name);
+    $stmt -> bindParam(':last_name', $last_name);
+    $stmt -> bindParam(':email', $email);
+    $stmt -> bindParam(':password', $password);
+    $stmt -> bindParam(':phone', $phone);
+    $stmt -> bindParam(':street', $street);
+    $stmt -> bindParam(':postal_code', $postal_code);
+    $stmt -> bindParam(':city', $city);
+    $stmt -> bindParam(':country', $country);
+    $stmt -> bindParam(':create_date', $create_date);
+    $stmt -> bindParam(':admin', $admin);
+    $stmt->execute();
     
   	$_SESSION['email'] = $email;
   	$_SESSION['success'] = "You are now logged in";
   	header('location: ../public/index.php');
-  }
+  // }
 }
 ?>
