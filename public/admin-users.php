@@ -6,7 +6,7 @@
 // ------------------ DELETE, EDIT and ADD BUTTONS ------------------
 
 
-		// DELETE USERS
+// DELETE USERS
 
 if(isset($_POST["deleteUser"])){
  $sql = "DELETE FROM users WHERE id = :id;";
@@ -17,8 +17,6 @@ $stmt->execute();
 }
 
 // EDIT USER
-
-
 
 $password  = "";
 $confirmPassword = "";
@@ -54,7 +52,6 @@ if(isset($_POST['updateUserBtn'])){
 
 // ADD USER
 
-
 $message  = "";
 $error = "";
 $id  = "";
@@ -81,10 +78,54 @@ if (isset($_POST['addUserBtn'])) {
     $confirmPassword = trim($_POST['addConfirmPassword']);
 
 
-    if ($password !== $confirmPassword) {
+    if (empty($first_name)){
+        $error = "Please write your first name in the form";
+    }
+    
+    if (empty($last_name)){
+        $error .= "Please write your last name in the form";
+    }
+    
+    if (empty($email)){
+        $error .= "Please write your email in the form";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $error .= "Your email is incorrect";
+    }
+    
+    if (empty($phone)){
+        $error .= "Please write your phone number in the form";
+    }
+    
+    if (empty($street)){
+        $error .= "Please write your street in the form";
+    }
+    
+    if (empty($postal_code)){
+        $error .= "Please write your postal code in the form";
+    }
+    
+    if (empty($city)){
+        $error .= "Please write your city in the form";
+    }
+    
+    if (empty($country)){
+        $error .= "Please write your country in the form";
+    }
+     
+    if (empty($password)){
+        $error .= "Please write your pasword in the form";
+    }
+
+    if ($password !== $confirmPassword){
+        $error .= "Confirmed password incorrect!";
+    }
+
+    if ($error) {
         $message = '
         <div class="alert alert-danger" role="alert">
-                Confirmed password incorrect!
+                {$error}
             </div>
         ';
     } else { 
@@ -111,8 +152,6 @@ if (isset($_POST['addUserBtn'])) {
 
 }
 }
- 
-
 
 // ------------------ FETCH AREA ------------------
 
@@ -124,7 +163,6 @@ $users = $stmt->fetchAll();
 
 
 // EDIT USER FETCH:
-
 
     $fetchOne = "SELECT * FROM users WHERE id = :id;";
 
