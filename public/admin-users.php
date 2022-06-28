@@ -20,9 +20,22 @@ $stmt->execute();
 
 
 
+$password  = "";
+$confirmPassword = "";
 if(isset($_POST['updateUserBtn'])){
+    $password        = trim($_POST['password']);
+    $updateConfirmPassword = trim($_POST['updateConfirmPassword']);
+
+    if ($password !== $updateConfirmPassword) {
+        $message = '
+        <div class="alert alert-danger" role="alert">
+                Confirmed password incorrect!
+            </div>
+        ';
+    } 
+    else { 
 	$sql = "UPDATE users
-	SET first_name = :first_name, last_name = :last_name, email = :email, phone =:phone, street =:street, postal_code =:postal_code, city =:city, country =:country, updatePassword =:password WHERE id = :id";
+	SET first_name = :first_name, last_name = :last_name, email = :email, phone =:phone, street =:street, postal_code =:postal_code, city =:city, country =:country, password =:password WHERE id = :id";
 	$stmt = $dbconnect->prepare($sql);
 	$stmt -> bindParam(':id', $_GET['editUserId']);
 	$stmt -> bindParam(':first_name', $_POST['first_name']);
@@ -33,8 +46,9 @@ if(isset($_POST['updateUserBtn'])){
 	$stmt -> bindParam(':postal_code', $_POST['postal_code']);
 	$stmt -> bindParam(':city', $_POST['city']);
 	$stmt -> bindParam(':country', $_POST['country']);
-	$stmt -> bindParam(':password', $_POST['updatePassword']);
+	$stmt -> bindParam(':password', $_POST['password']);
 	$stmt ->execute();
+    }
 
 }
 
@@ -42,6 +56,8 @@ if(isset($_POST['updateUserBtn'])){
 
 
 $message  = "";
+$error = "";
+$id  = "";
 $first_name = "";
 $last_name = "";
 $email    = "";
@@ -52,7 +68,6 @@ $city    = "";
 $country    = "";
 $password  = "";
 $confirmPassword = "";
-$create_date =  "";
 if (isset($_POST['addUserBtn'])) {
     $first_name        = trim($_POST['first_name']);
     $last_name        = trim($_POST['last_name']);
@@ -62,26 +77,52 @@ if (isset($_POST['addUserBtn'])) {
     $postal_code           = trim($_POST['postal_code']);
     $city           = trim($_POST['city']);
     $country           = trim($_POST['country']);
-    $password        = trim($_POST['addPassword']);
+    $password        = trim($_POST['password']);
     $confirmPassword = trim($_POST['addConfirmPassword']);
-    $create_date = date("Y-m-d h:i:sa");
+
+if (empty($first_name)){
+    $error = "Please write your first name in the form"
+}
+
+if (empty($last_name)){
+    $error = "Please write your last name in the form"
+}
+
+if (empty($email)){
+    $error = "Please write your email in the form"
+}
+
+if (empty($phone)){
+    $error = "Please write your phone number in the form"
+}
+
+if (empty($street)){
+    $error = "Please write your street in the form"
+}
+
+if (empty($postal_code)){
+    $error = "Please write your postal code in the form"
+}
 
 
-echo "<pre>";
-print_r("röv");
-echo "</pre>";
+if (empty($phone)){
+    $error = "Please write your phone number in the form"
+}
+
+
+
 
 
     if ($password !== $confirmPassword) {
         $message = '
-            <div class="error_msg">
+        <div class="alert alert-danger" role="alert">
                 Confirmed password incorrect!
             </div>
         ';
     } else { 
         
-        $sql = " INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country, create_date)
-        VALUES (:first_name, :last_name, :email, :password :phone :street, :postal_code, :city, :country :create_date);
+        $sql = " INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country)
+        VALUES (:first_name, :last_name, :email, :password, :phone, :street, :postal_code, :city, :country);
     ";
 
     $stmt = $dbconnect->prepare($sql);
@@ -94,7 +135,6 @@ echo "</pre>";
     $stmt -> bindParam(':postal_code', $postal_code);
     $stmt -> bindParam(':city', $city);
     $stmt -> bindParam(':country', $country);
-    $stmt -> bindParam(':create_date', $create_date);
     $stmt -> execute();
 
     echo "<pre>";
@@ -104,11 +144,6 @@ echo "</pre>";
 }
 }
  
-  
-
-
-
-
 
 
 // ------------------ FETCH AREA ------------------
@@ -221,9 +256,8 @@ echo "</pre>";
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
-                                    </button>
+                                  
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
@@ -266,7 +300,7 @@ echo "</pre>";
 
 																				<div class="form-group">
                                             <label for="stock">Password</label>
-                                            <input type="password" class="form-control" name="updatePassword">
+                                            <input type="password" class="form-control" name="password">
                                         </div>
 
                                         <div class="form-group">
@@ -277,7 +311,11 @@ echo "</pre>";
                                         <div class="form-group">
 
                                             <input type="submit" class="btn btn-primary" name="updateUserBtn" value="Update User">
+                                            <input type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" value="Close">
                                         </div>
+
+                            
+
                                     </form>
                                 </div>
                             </div>
@@ -299,59 +337,62 @@ echo "</pre>";
                         <div class="modal-body">
                             <form action="" method="POST">
                             <div class="form-group">
+                            
                             <?=$message ?>
+
                             <div class="form-group">
 
                                             <label for="title">First name</label>
-                                            <input type="text" class="form-control" name="first_name" value="<?=htmlentities($first_name) ?>">
+                                            <input type="text" class="form-control" name="first_name" ">
                                         </div>
 																				<div class="form-group">
                                             <label for="title">Last name</label>
-                                            <input type="text" class="form-control" name="last_name" value="<?=htmlentities($last_name) ?>">
+                                            <input type="text" class="form-control" name="last_name">
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Email</label>
-                                            <input type="text" class="form-control" name="email" value="<?=htmlentities($email) ?>">
+                                            <input type="text" class="form-control" name="email">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="price">Phone</label>
-                                            <input type="text" class="form-control" name="phone" value="<?=htmlentities($phone) ?>">
+                                            <input type="text" class="form-control" name="phone" >
                                         </div>
 
                                         <div class="form-group">
                                             <label for="stock">Street</label>
-                                            <input type="text" class="form-control" name="street" value="<?=htmlentities($street) ?>">
+                                            <input type="text" class="form-control" name="street">
                                         </div>
                                        
 																				
                                         <div class="form-group">
                                             <label for="stock">Postal code</label>
-                                            <input type="text" class="form-control" name="postal_code" value="<?=htmlentities($postal_code) ?>">
+                                            <input type="text" class="form-control" name="postal_code">
                                         </div>
 																				
                                         <div class="form-group">
                                             <label for="stock">City</label>
-                                            <input type="text" class="form-control" name="city" value="<?=htmlentities($city) ?>">
+                                            <input type="text" class="form-control" name="city">
                                         </div>
 																				<div class="form-group">
                                             <label for="stock">Country</label>
-                                            <input type="text" class="form-control" name="country" value="<?=htmlentities($country) ?>">
+                                            <input type="text" class="form-control" name="country">
                                         </div>
 
 																				<div class="form-group">
                                             <label for="stock">Password</label>
-                                            <input type="password" class="form-control" name="addPassword" value="<?=htmlentities($password) ?>">
+                                            <input type="password" id="addPassword" class="form-control" name="password">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="confirm-password">Confirm Password</label>
-                                            <input type="password" class="form-control" name="addConfirmPassword" value="<?=htmlentities($confirmPassword) ?>">
+                                            <input type="password" id="addConfirmPassword" class="form-control" name="addConfirmPassword">
                                         </div>
 
                                         <div class="form-group">
 
                                             <input type="submit" class="btn btn-primary" name="addUserBtn" value="Add User">
+                                            <input type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" value="Close">
                                 </div>
                             </form>
                         </div>
@@ -362,10 +403,28 @@ echo "</pre>";
           
 
 
-
+        
 
 
 </body>
+
+<script>
+
+var addConfirmPassword = $('#addPassword');
+var addPassword = $('#addConfirmPassword');
+
+    $('#updateUserBtn').click(function(e) {
+    e.preventDefault();
+
+    if (addConfirmPassword !== addPassword){
+        $("#add_modal").modal({ backdrop: "static ", keyboard: false });
+    }
+    else{
+ $('#add_modal').modal('toggle'); 
+    }
+    return false;
+});
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
