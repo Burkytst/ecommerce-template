@@ -177,9 +177,10 @@ echo "</pre>";
 
 ?>
 
-<?=template_header('Home')?>
 
+<?php include "includes/admin_header.php"; ?>
 
+<?php include "includes/admin_sidebar.php"; ?>
 
 
 <!-- SIDANS HUVUDSAKLIGA INNEHÅLL -->
