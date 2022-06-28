@@ -1,6 +1,6 @@
 <?php
-	require('../src/config.php');
-    require('../src/dbconnect.php');
+	require('../../src/config.php');
+    require('../../src/dbconnect.php');
 
 
 // ------------------ DELETE, EDIT and ADD BUTTONS ------------------
