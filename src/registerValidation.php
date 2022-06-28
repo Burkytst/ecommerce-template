@@ -4,7 +4,10 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+require('dbconnect.php');
+
 // initializing variables
+$id = "";
 $email         = "";
 $first_name    = "";
 $last_name     = "";
@@ -76,7 +79,7 @@ if (isset($_POST['regForm'])) {
   	$query = "INSERT INTO users (phone, email, password, first_name, last_name, street, postal_code, city, country, create_date, admin) 
   			  VALUES('$phone', '$email', '$password', '$first_name', '$last_name', '$street', '$postal_code', '$city', '$country', '$create_date', 1)";
 
-    $stmt = $db->prepare($query);
+    $stmt = $dbconnect->prepare($query);
     $stmt -> bindParam(':first_name', $first_name);
     $stmt -> bindParam(':last_name', $last_name);
     $stmt -> bindParam(':email', $email);
