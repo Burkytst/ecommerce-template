@@ -2,11 +2,6 @@
 	require('../src/config.php');
     require('../src/dbconnect.php');
 
-	if (mysqli_connect_errno()) {
-		echo "Err " . $con->connect_error;
-		exit();
-	}
-
 	$sql = "SELECT * FROM products";
     $stmt = $dbconnect->query($sql);
     $products = $stmt->fetchAll();
