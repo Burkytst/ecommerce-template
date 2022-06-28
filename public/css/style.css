@@ -129,7 +129,7 @@ nav a {
 
 /* CHECKOUT */
 .payment-info {
-    background: blue;
+    background: rgb(155, 187, 199);
     padding: 10px;
     border-radius: 6px;
     color: #fff;
@@ -183,13 +183,13 @@ nav a {
   
   label.radio input:checked + span {
     border-color: #fff;
-    background-color: blue;
+    background-color: rgb(153, 181, 197);
     color: #fff;
   }
   
   .credit-inputs {
     background: rgb(102,102,221);
-    color: #fff !important;
+    color: #black !important;
     border-color: rgb(102,102,221);
   }
   
@@ -199,8 +199,9 @@ nav a {
   }
   
   .credit-card-label {
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 300;
+    line-height: 0px;
   }
   
   .form-control.credit-inputs:focus {
