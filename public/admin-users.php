@@ -80,38 +80,6 @@ if (isset($_POST['addUserBtn'])) {
     $password        = trim($_POST['password']);
     $confirmPassword = trim($_POST['addConfirmPassword']);
 
-if (empty($first_name)){
-    $error = "Please write your first name in the form"
-}
-
-if (empty($last_name)){
-    $error = "Please write your last name in the form"
-}
-
-if (empty($email)){
-    $error = "Please write your email in the form"
-}
-
-if (empty($phone)){
-    $error = "Please write your phone number in the form"
-}
-
-if (empty($street)){
-    $error = "Please write your street in the form"
-}
-
-if (empty($postal_code)){
-    $error = "Please write your postal code in the form"
-}
-
-
-if (empty($phone)){
-    $error = "Please write your phone number in the form"
-}
-
-
-
-
 
     if ($password !== $confirmPassword) {
         $message = '
