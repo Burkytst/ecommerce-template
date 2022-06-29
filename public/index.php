@@ -24,8 +24,8 @@
 <body class="col-12">
 					
 							<div class="text-center">
-										<h3>Featured Product</h3>
-										<h2>Popular Products</h2></div>
+										<h3>Populare Products</h3>
+										<h2>Which one is your favourite?</h2></div>
 	
 					
 <section class="row col-12">				
@@ -35,17 +35,16 @@
 <div class="card col-3 p-1 bg-white m-3">
             <div class="about-product text-center mt-2">
 						<a class="text-dark" href="product.php?id=<?=htmlentities($product['id'])?>">
-            <a class="text-dark" href="product.php?id=<?=$product['id']?>">
 							<img src="img/products/<?=$product['img_url']?>" class="productThumb mw-100 shadow-1-strong rounded mb-4">
                 <div>
-                    <h4><?=$product["title"]?></h4>
+                    <h4 class="m-1"><?=$product["title"]?></h4></a>
                     <h6 class="text-dark mt-0 text-black-50"><?=$product["description"]?></h6>
                 </div>
             </div>
             <div class="stats mt-2">
-                <div class="d-flex justify-content-between p-price"><span>Pro Display XDR</span><span><?=$product["price"]?> </span></div>
-                <div class="d-flex justify-content-between p-price"><span>Pro stand</span></div>
-                <div class="d-flex justify-content-between p-price"><span>In stock: <?=$product["stock"]?></span></div>
+                <div class="d-flex justify-content-between p-price m-1"><span>Pro Display XDR</span><span><?=$product["price"]?> </span></div>
+                <div class="d-flex justify-content-between p-price m-1"><span>Pro stand</span></div>
+                <div class="d-flex justify-content-between p-price m-1"><span>In stock: <?=$product["stock"]?></span></div>
             </div>
             <div class="d-flex justify-content-between total font-weight-bold mt-4"><span>Total</span><span><?=$product["price"]?> SEK</span></div>
         </div>
@@ -69,6 +68,6 @@
 
 </html>
 
-
+<?=template_footer('Home')?>
 
 

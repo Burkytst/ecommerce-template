@@ -66,7 +66,7 @@ function template_header($title) {
     <li> 
                 {$cart}  </li>       
             </nav>
-            <a href="index.php" class="logo"><h1 class="logo">SIBAR<span class="red">SNKR</p></h1></a>
+            <a href="index.php" class="logo"><h1 class="logo">SIBAR<span class="orange">SNKR</p></h1></a>
         </div>
         
         
@@ -107,10 +107,33 @@ function template_header($title) {
     $year = date('Y');
     echo <<<EOT
            
-            <footer>
-                <div class="content-wrapper">
-                    <p>&copy; $year, Sneaky Sibar Sneakers</p>
-                </div>
+    
+            <footer>         
+ 
+                <footer class="sticky-footer m-3">
+                  <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                      <span class= "lead">© 2022, Sneaky Sibar Sneakers</span>
+                    </div>
+                  </div>
+                </footer>
+        
+              </div>
+          
+            </div>
+         
+        
+            <script src="js/sb-admin-2.min.js"></script>
+           
+        
+        </body>
+        
+        </html>
+
+
+
+
+
             </footer>
         </div>
             <script src="script.js"></script>
