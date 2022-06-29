@@ -1,8 +1,9 @@
 
+
 <?php
 
-require('../../../src/config.php');
-require('../../../src/dbconnect.php');
+require('../../src/config.php');
+require('../../src/dbconnect.php');
 
 $message = "";
 
@@ -20,8 +21,8 @@ $street    = "";
 $postal_code    = "";
 $city    = "";
 $country    = "";
-$password  = "";
-$confirmPassword = "";
+$password_1  = "";
+$password_2 = "";
 if (isset($_POST['addUserBtn'])) {
     $first_name        = trim($_POST['first_name']);
     $last_name        = trim($_POST['last_name']);
@@ -31,8 +32,9 @@ if (isset($_POST['addUserBtn'])) {
     $postal_code           = trim($_POST['postal_code']);
     $city           = trim($_POST['city']);
     $country           = trim($_POST['country']);
-    $password        = trim($_POST['password']);
-    $confirmPassword = trim($_POST['confirmPassword']);
+    $password_1        = trim($_POST['password']);
+    $password_2 = trim($_POST['confirmPassword']);
+
 
 
   if (empty($first_name)){
@@ -75,17 +77,20 @@ if (isset($_POST['addUserBtn'])) {
       $error .= "Please write your pasword in the form<br>";
   }
 
-  if ($password !== $confirmPassword){
+  if ($password_1 !== $password_2){
       $error .= "Confirmed password incorrect!<br>";
   }
 
   if ($error) {
-    $message = "$error";
-    
+    $message = '<div class="alert alert-danger" role="alert">' . $error . '</div>';
+
   } else { 
-    $message = "Sucess! You have uploaded a new user!";
-        $sql = " INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country)
-        VALUES (:first_name, :last_name, :email, :password, :phone, :street, :postal_code, :city, :country);
+    $message = '<div class="alert alert-success" role="alert"> Success! You have uploaded a new user! </div>';
+ 
+    $password = password_hash($password_1, PASSWORD_DEFAULT);
+
+        $sql = " INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country, admin)
+        VALUES (:first_name, :last_name, :email, :password, :phone, :street, :postal_code, :city, :country :admin);
     ";
 
     $stmt = $dbconnect->prepare($sql);
@@ -98,13 +103,16 @@ if (isset($_POST['addUserBtn'])) {
     $stmt -> bindParam(':postal_code', $postal_code);
     $stmt -> bindParam(':city', $city);
     $stmt -> bindParam(':country', $country);
+    $stmt -> bindParam(':admin', $admin);
     $stmt -> execute();
 
    
 
 }
 }
- 
+
+
+
 
 
 ?>
@@ -116,15 +124,14 @@ if (isset($_POST['addUserBtn'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/sb-admin-2.css">
+
 </head>
 <body class="m-3">
 
-<h2>Add New User</h2>
+<h2 class="display-4">Add New User</h2>
 
-
-
-<div id="addUser-message"><?=$message?></div>
+<?=$message?>
 
 <form action="" method="POST">
 <div class="form-row">
@@ -152,11 +159,11 @@ if (isset($_POST['addUserBtn'])) {
     <input type="text" class="form-control" name="street" id="inputAddress" placeholder="1234 Main St">
   </div>
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-5">
       <label for="inputCity">Country</label>
       <input type="text" class="form-control" name="country" id="inputCountry">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-5">
       <label for="inputCity">City</label>
       <input type="text" class="form-control" name="city" id="inputCity">
     </div>
@@ -164,7 +171,8 @@ if (isset($_POST['addUserBtn'])) {
       <label for="inputCity">Postal code</label>
       <input type="text" class="form-control" name="postal_code" id="inputPostal">
     </div>
-  </div>
+</div>
+</div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Password</label>
@@ -176,6 +184,11 @@ if (isset($_POST['addUserBtn'])) {
     </div>
   </div>
   </div>
+
+  <div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Admin</label>
+  </div>
   
   <div class="form-group">
 
@@ -186,11 +199,5 @@ if (isset($_POST['addUserBtn'])) {
 
 </div>
 </form>
-  
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</html>
 </body>
 </html>
