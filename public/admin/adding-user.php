@@ -23,77 +23,32 @@ $city    = "";
 $country    = "";
 $password_1  = "";
 $password_2 = "";
+$admin = 0;
+
+
 if (isset($_POST['addUserBtn'])) {
-    $first_name        = trim($_POST['first_name']);
-    $last_name        = trim($_POST['last_name']);
-    $email           = trim($_POST['email']);
-    $phone           = trim($_POST['phone']);
-    $street           = trim($_POST['street']);
-    $postal_code           = trim($_POST['postal_code']);
+    $first_name     = trim($_POST['first_name']);
+    $last_name      = trim($_POST['last_name']);
+    $email          = trim($_POST['email']);
+    $phone          = trim($_POST['phone']);
+    $street         = trim($_POST['street']);
+    $postal_code    = trim($_POST['postal_code']);
     $city           = trim($_POST['city']);
-    $country           = trim($_POST['country']);
-    $password_1        = trim($_POST['password']);
-    $password_2 = trim($_POST['confirmPassword']);
+    $country        = trim($_POST['country']);
+    $password_1     = trim($_POST['password']);
+    $password_2     = trim($_POST['confirmPassword']);
+    $admin          = trim($_POST['admin']);
 
-
-
-  if (empty($first_name)){
-      $error = "Please write your first name in the form <br>";
-  }
-  
-  if (empty($last_name)){
-      $error .= "Please write your last name in the form<br>";
-  }
-  
-  if (empty($email)){
-      $error .= "Please write your email in the form<br>";
-  }
-
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-      $error .= "Your email is incorrect<br>";
-  }
-  
-  if (empty($phone)){
-      $error .= "Please write your phone number in the form<br>";
-  }
-  
-  if (empty($street)){
-      $error .= "Please write your street in the form<br>";
-  }
-  
-  if (empty($postal_code)){
-      $error .= "Please write your postal code in the form<br>";
-  }
-  
-  if (empty($city)){
-      $error .= "Please write your city in the form<br>";
-  }
-  
-  if (empty($country)){
-      $error .= "Please write your country in the form<br>";
-  }
-   
-  if (empty($password)){
-      $error .= "Please write your pasword in the form<br>";
-  }
-
-  if ($password_1 !== $password_2){
-      $error .= "Confirmed password incorrect!<br>";
-  }
-
-  if ($error) {
-    $message = '<div class="alert alert-danger" role="alert">' . $error . '</div>';
-
-  } else { 
-    $message = '<div class="alert alert-success" role="alert"> Success! You have uploaded a new user! </div>';
  
-    $password = password_hash($password_1, PASSWORD_DEFAULT);
+    $password = password_hash($password_1, PASSWORD_DEFAULT);
+    $create_date = date("Y/m/d");
 
-    // if ($_POST['admin'] == 'adminValue'){}
 
-        $sql = " INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country, admin)
-        VALUES (:first_name, :last_name, :email, :password, :phone, :street, :postal_code, :city, :country :admin);
-    ";
+  	$sql = "INSERT INTO users (phone, email, password, first_name, last_name, street, postal_code, city, country, create_date, admin) 
+  			  VALUES('$phone', '$email', '$password', '$first_name', '$last_name', '$street', '$postal_code', '$city', '$country', '$create_date', '$admin')";
+    
+
+    echo print_r($sql);
 
     $stmt = $dbconnect->prepare($sql);
     $stmt -> bindParam(':first_name', $first_name);
@@ -108,9 +63,6 @@ if (isset($_POST['addUserBtn'])) {
     $stmt -> bindParam(':admin', $admin);
     $stmt -> execute();
 
-   
-
-}
 }
 
 
@@ -194,9 +146,9 @@ if (isset($_POST['addUserBtn'])) {
   </div>
 
   <div class="form-check mb-3">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="admin" value="adminValue">
-    <label class="form-check-label" for="exampleCheck1">Admin</label>
-</div>
+    <input type="radio" name="admin" id="customer" value="0">Customer<br>
+    <input type="radio" name="admin" id="admin" value="1">Admin<br>
+  </div>
 <div class="form-group">
 <input type="submit" class="btn btn-primary" name="addUserBtn" value="Add User">
 <a href="admin-users.php" class="btn btn-primary" role="button">Go back</a>
