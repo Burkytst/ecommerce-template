@@ -34,18 +34,17 @@
       <li class="nav-item">
         <a class="nav-link" href="../products.php">Products</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="../admin-users/admin-users.php" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Users
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Add user</a>
-        </div>
+      <li class="nav-item">
+        <a class="nav-link" href="admin-users/admin-users.php">Users</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Shop</a>
       </li>
-    </ul>
+      <li>
+      <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <a class="nav-link" href="#">
+            <span>Log Out</span>   <i class="fas fa-sign-out-alt"></i>
+</li></ul>
   </div>
 </nav>
 

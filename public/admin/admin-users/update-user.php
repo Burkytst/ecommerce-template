@@ -120,7 +120,7 @@ if ($error) {
   <title>Document</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body class="m-3">
 
 <h2>Update user</h2>
 
@@ -183,7 +183,7 @@ if ($error) {
 
 
   <input type="submit" class="btn btn-primary" name="updateUserBtn" value="Update User">
-                                            <input type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" value="Go back">
+  <a href="admin-users.php" class="btn btn-primary" role="button">Go back</a>
 </div>
 </form>
   
