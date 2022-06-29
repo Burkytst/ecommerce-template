@@ -44,6 +44,61 @@ if (isset($_POST['addUserBtn'])) {
     $create_date = date("Y/m/d");
 
 
+    if (empty($first_name)){
+      $error = "Please write your first name in the form <br>";
+  }
+  
+  if (empty($last_name)){
+      $error .= "Please write your last name in the form<br>";
+  }
+  
+  if (empty($email)){
+      $error .= "Please write your email in the form<br>";
+  }
+
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+      $error .= "Your email is incorrect<br>";
+  }
+  
+  if (empty($phone)){
+      $error .= "Please write your phone number in the form<br>";
+  }
+  
+  if (empty($street)){
+      $error .= "Please write your street in the form<br>";
+  }
+  
+  if (empty($postal_code)){
+      $error .= "Please write your postal code in the form<br>";
+  }
+  
+  if (empty($city)){
+      $error .= "Please write your city in the form<br>";
+  }
+  
+  if (empty($country)){
+      $error .= "Please write your country in the form<br>";
+  }
+   
+  if (empty($password)){
+      $error .= "Please write your pasword in the form<br>";
+  }
+
+  if ($password_1 !== $password_2){
+      $error .= "Confirmed password incorrect!<br>";
+  }
+
+  if ($error) {
+    $message = '<div class="alert alert-danger" role="alert">' . $error . '</div>';
+
+  } 
+
+
+
+
+
+else { 
+    $message = '<div class="alert alert-success" role="alert"> Success! You have uploaded a new user! </div>';
   	$sql = "INSERT INTO users (phone, email, password, first_name, last_name, street, postal_code, city, country, create_date, admin) 
   			  VALUES('$phone', '$email', '$password', '$first_name', '$last_name', '$street', '$postal_code', '$city', '$country', '$create_date', '$admin')";
 
@@ -59,10 +114,8 @@ if (isset($_POST['addUserBtn'])) {
     $stmt -> bindParam(':country', $country);
     $stmt -> bindParam(':admin', $admin);
     $stmt -> execute();
-
 }
-
-
+}
 
 
 
