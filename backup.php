@@ -2,7 +2,12 @@
 	require('../../../src/config.php');
     require('../../../src/dbconnect.php');
 
+<<<<<<< HEAD:backup.php
     $message = "";
+=======
+    
+
+>>>>>>> d26d18bc23ba32f4c1569da29d07fb85ef3d2920:public/admin/admin-users.php
 
 // ------------------ FETCH AREA ------------------
 
@@ -57,11 +62,26 @@ $users = $stmt->fetchAll();
   $stmt->execute();
   $editUsers = $stmt->fetch();
 
+<<<<<<< HEAD:backup.php
 
 ?>
 <?php include "../includes/admin_header.php"; ?>
 
 <?php include "../includes/admin_sidebar.php"; ?>
+=======
+    $stmt = $dbconnect->prepare($fetchOne);
+    $stmt->bindParam(':id', $_GET["editUserId"]);
+    $stmt->execute();
+    $editUsers = $stmt->fetch();
+ 
+
+echo "</pre>";
+
+?>
+<?php include "includes/admin_header.php"; ?>
+
+<?php include "includes/admin_sidebar.php"; ?>
+>>>>>>> d26d18bc23ba32f4c1569da29d07fb85ef3d2920:public/admin/admin-users.php
 
 
 <!-- SIDANS HUVUDSAKLIGA INNEHÅLL -->
