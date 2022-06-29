@@ -1,6 +1,7 @@
 <?php
     require('../src/config.php');
     require('../src/dbconnect.php');
+    require('checkout.php');
 
 
     $userID =  $_SESSION['id'];
@@ -48,6 +49,7 @@ if (isset($_POST['update']) && isset($_SESSION['cart'])) {
         if (strpos($k, 'quantity') !== false && is_numeric($v)) {
             $id = str_replace('quantity-', '', $k);
             $quantity = (int)$v;
+
             // Always do checks and validation
             if (is_numeric($id) && isset($_SESSION['cart'][$id]) && $quantity > 0) {
                 // Update new quantity
@@ -55,7 +57,7 @@ if (isset($_POST['update']) && isset($_SESSION['cart'])) {
             }
         }
     }
-    // Prevent form resubmission...
+
     header('location: cart.php');
     exit;
 }
@@ -80,7 +82,7 @@ if ($products_in_cart) {
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($products as $product) {
-        $subtotal    += (float)$product['price'] * (int)$products_in_cart[$product['id']];
+        $subtotal    += (float)$product['price']  * (int)$products_in_cart[$product['id']];
         $subquantity += (int)$product['quantity'] * (int)$products_in_cart[$product['quantity']];
     }
 

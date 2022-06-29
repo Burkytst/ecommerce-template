@@ -178,7 +178,7 @@ nav a {
   .credit-card-label {
     font-size: 12px;
     font-weight: 300;
-    line-height: 0px;
+    line-height: 5px;
   }
   
   .form-control.credit-inputs:focus {
