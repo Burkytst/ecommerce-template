@@ -3,7 +3,11 @@
     require('../src/dbconnect.php');
     require('checkout.php');
 
-
+// Remove product from cart, check for the URL param "remove", this is the product id, make sure it's a number and check if it's in the cart
+if (isset($_GET['remove']) && is_numeric($_GET['remove']) && isset($_SESSION['cart']) && isset($_SESSION['cart'][$_GET['remove']])) {
+    // Remove the product from the shopping cart
+    unset($_SESSION['cart'][$_GET['remove']]);
+}
 
 // If the user clicked the add to cart button on the product page we can check for the form data
 if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['product_id']) && is_numeric($_POST['quantity'])) {
@@ -112,9 +116,14 @@ $user = $stmt->fetch();
                             <div class="ml-2"><span class="font-weight-bold d-block"><?=$product['title']?></span></div>
                         </div>
 
-                        <div class="d-flex flex-row align-items-center"><span class="d-block">$<?=$product['price']?></div>
-                        <div class="d-flex flex-row align-items-center"><span class="d-block"><input type="number" name="quantity-<?=$product['id']?>" value="<?=$products_in_cart[$product['id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required> </span>
-                        <span class="d-block ml-5 font-weight-bold">&nbsp;$<?=$product['price'] * $products_in_cart[$product['id']]?></span></div>
+                        <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+                            <div class="d-flex flex-row">á $<?=$product['price']?></div>
+                            <div class="d-flex flex-row"><input type="number" name="quantity-<?=$product['id']?>" value="<?=$products_in_cart[$product['id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" style="width: 5em" required></div>
+                            <div class="d-flex flex-row">&nbsp;$<?=$product['price'] * $products_in_cart[$product['id']]?></div>
+                            <div class="d-flex flex-row"><a href="cart.php?remove=<?=$product['id']?>" class="remove"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+                        </div>
+
+                        
                     </div>
 
         <?php endforeach; ?>
@@ -124,7 +133,8 @@ $user = $stmt->fetch();
             <div class="col-md-4">
                 <div class="payment-info">
                 
-                    <div class="d-flex justify-content-between align-items-center"><span>Shipping details</span></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <span>Shipping details</span></div>
                     <?php if ($userID > 0): ?>
                     <div><label class="adress-label"><?=$user['first_name']?> <?=$user['last_name']?></label></div>
                     <div><label class="adress-label"><?=$user['street']?></label></div>
