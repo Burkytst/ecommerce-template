@@ -2,14 +2,9 @@
 	require('../../src/config.php');
     require('../../src/dbconnect.php');
 
-    if (mysqli_connect_errno()) {
-		echo "Err " . $con->connect_error;
-		exit();
-	}
-
 	$sql = "SELECT * FROM products";
-	$products = $con->query($sql);
-	$products->fetch_all(MYSQLI_ASSOC);
+	$stmt = $dbconnect->query($sql);
+	$products = $stmt->fetchAll();
 
 ?>
 
@@ -221,8 +216,6 @@
 
                 window.addEventListener("click",function(event){
                     event.preventDefault();
-                    
-                    console.log("mesut---",event.target.classList.value);
                 if(event.target.classList.contains("fade") || event.target.classList.value==""){
                     location.reload(true)
                 }
