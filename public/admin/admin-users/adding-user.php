@@ -80,7 +80,7 @@ if (isset($_POST['addUserBtn'])) {
   }
 
   if ($error) {
-    $message = $error;
+    $message = "$error;"
     
   } else { 
     $message = "Sucess! You have uploaded a new user!";
