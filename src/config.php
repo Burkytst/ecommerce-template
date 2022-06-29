@@ -51,13 +51,22 @@ function template_header($title) {
         <body>
         
         <div id="header">
-            <nav>
-                <a href="index.php">START</a>
-                <a href="contact.php">CONTACT</a>
-                {$menuVar} 
-                {$cart}         
+        <nav class="navbar navbar-expand-lg navbar-white bg-white">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php">HOME <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="contact.php">CONTACT</a>
+      </li>
+      <li class="nav-item">
+      <div class="nav-link">{$menuVar}</div>
+    </li>
+    <li> 
+                {$cart}  </li>       
             </nav>
-            <a href="index.php" class="logo"><h1 class="logo">SIBAR<span class="red">SNKR</p></h1></a>
+            <a href="index.php" class="logo"><h1 class="logo">SIBAR<span class="orange">SNKR</p></h1></a>
         </div>
         
         
@@ -98,10 +107,33 @@ function template_header($title) {
     $year = date('Y');
     echo <<<EOT
            
-            <footer>
-                <div class="content-wrapper">
-                    <p>&copy; $year, Sneaky Sibar Sneakers</p>
-                </div>
+    
+            <footer>         
+ 
+                <footer class="sticky-footer m-3">
+                  <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                      <span class= "lead">© 2022, Sneaky Sibar Sneakers</span>
+                    </div>
+                  </div>
+                </footer>
+        
+              </div>
+          
+            </div>
+         
+        
+            <script src="js/sb-admin-2.min.js"></script>
+           
+        
+        </body>
+        
+        </html>
+
+
+
+
+
             </footer>
         </div>
             <script src="script.js"></script>

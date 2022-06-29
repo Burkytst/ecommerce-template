@@ -14,11 +14,19 @@
 
 <?php include "includes/admin_sidebar.php"; ?>
 
+<head>
 
-    <div id="content-wrapper">
-        <div class="container-fluid">
-            <h1>Product Management System</h1>
+<link rel="stylesheet" href="../css/sb-admin-2.css">
+
+</head>
+</body>
+    <div id="content-wrapper" class="pt-3">
+        <div class="container-fluid m-3 mt-3">
+        <h1 class="display-4">Product Management System</h1>
             <hr>
+
+<div class="mb-4 pt-3">
+            <button class='btn btn-primary' data-toggle='modal' data-target='#add_modal'>Add Product</button></div>
 
             <table class="table table-bordered">
                 <thead class="thead-dark">
@@ -30,9 +38,9 @@
                         <th>Stock</th>
                         <th>Image</th>
                         <th>Actions</th>
-                        <th>
+                        <!-- <th>
                                     <button class='btn btn-primary' data-toggle='modal' data-target='#add_modal'>Add Product</button>
-                                                    </th>
+                                                    </th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +70,10 @@
                             </div>
                         </td>
                     </tr>
+
+
+<!-- ---- Delete modal ---- -->
+
                     <div id="delete_modal<?=$product['id']?>" class="modal fade">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -90,6 +102,11 @@
                             </div>
                         </div>
                     </div>
+
+
+
+<!------------ EDIT MODULE ----------->
+
                     <div id="edit_modal<?=$product['id']?>" class="modal fade">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -143,6 +160,8 @@
                 </tbody>
             </table>
 
+           <!-- ----- ADD MODAL ----- -->
+
             <div id="add_modal" class="modal fade">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -180,21 +199,57 @@
                                     <input type="hidden" name="form_type" value="add">
                                     <input type="submit" class="btn btn-primary" name="add_product" value="Add Product">
                                 </div>
+                                <div class="form-group">
+                                            <div id="formInfoAdd" class=" hide alert"></div>
+                                        </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
             
+</body>  
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  </html>
           
 <script>
     if(window !==undefined){
         window.addEventListener('submit',function(e){
             if(e.submitter.name === "edit_product"){
                 e.preventDefault();
+                let _body = new FormData(e.target);
+               
+                if (_body.get("title") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type product title in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("description") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type description in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("price") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type product price in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("stock") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type stock in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
                 fetch('productsDb.php', {
                     method: 'POST',
-                    body: new FormData(e.target),
+                    body: _body,
                 }).then(function (response) {
                     if (response.ok) {
                         return response.json();
@@ -221,6 +276,8 @@
                 }
                 })
 
+                
+
 
             }
             if(e.submitter.name==="delete_product"){
@@ -244,9 +301,35 @@
             }
             if(e.submitter.name==="add_product"){
                 e.preventDefault();
+                let _body = new FormData(e.target);
+                
+                if (_body.get("title") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type product title in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("description") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type description in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("price") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type product price in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("stock") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type stock in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
                 fetch('productsDb.php', {
                     method: 'POST',
-                    body: new FormData(e.target),
+                    body: _body,
                 }).then(function (response) {
                     if (response.ok) {
                         return response.json();
