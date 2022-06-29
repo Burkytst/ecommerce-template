@@ -123,6 +123,15 @@ if ($error) {
   <link rel="stylesheet" href="css/sb-admin-2.css"></head>
 <body class="m-3">
 
+
+<?php include "includes/admin_header.php"; ?>
+
+    <div id="wrapper">
+
+<?php include "includes/admin_sidebar.php"; ?>
+<div id="content-wrapper" class="pt-3">
+    <div class="container-fluid m-3 mt-3">
+
 <h2 class="display-4">Update User</h2>
 
 
@@ -178,8 +187,6 @@ if ($error) {
       <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm password">
     </div>
   </div>
-  </div>
-
 
   <div class="form-check mb-3">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -188,11 +195,15 @@ if ($error) {
   
   <div class="form-group">
 
-
   <input type="submit" class="btn btn-primary" name="updateUserBtn" value="Update User">
   <a href="admin-users.php" class="btn btn-primary" role="button">Go back</a>
+</div>
+  </div>
+</div>
 </div>
 </form>
   
 </body>
 </html>
+
+<?php include "includes/admin_footer.php"; ?>

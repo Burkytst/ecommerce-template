@@ -2,13 +2,13 @@
 	require('../../src/config.php');
     require('../../src/dbconnect.php');
 
-    if (!isset($_SESSION['loggedin'])) {
+    // if (!isset($_SESSION['loggedin'])) {
 
-        header('Location: index.html');
+    //     header('Location: index.html');
         
-        exit;
+    //     exit;
         
-        }
+    //     }
 ?>
 
 
