@@ -1,209 +1,204 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&family=Open+Sans&display=swap");
 
-body {
-
-}
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
 h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 98px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 98px;
 }
 
 h2 {
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 p {
-    font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 /* HEADER  */
 
 #header {
-    margin: 0 auto 0 auto;
-    width: 100%;
-    text-align: center;
-    padding: 0 20px 0 20px;
+  margin: 0 auto 0 auto;
+  width: 100%;
+  text-align: center;
+  padding: 0 20px 0 20px;
 }
 
 .logo {
-    font-size: 8vw;
-    color: black;
-    text-decoration: none !important;
+  font-size: 8vw;
+  color: black;
+  text-decoration: none !important;
 }
 
 .logo a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .red {
-    color: #b02e2e;
+  color: #b02e2e;
 }
 
 nav {
-    text-align: end;
-    font-family: 'Montserrat', sans-serif;
-    margin: 20px 0 20px 0;
+  text-align: end;
+  font-family: "Montserrat", sans-serif;
+  margin: 20px 0 20px 0;
 }
 
 nav a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .modal a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .linkEffect {
-    cursor: pointer;
-    text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .cart_div {
-	float:right;
-	font-weight:bold;
-	position:relative;
-	}
+  float: right;
+  font-weight: bold;
+  position: relative;
+}
 .cart_div a {
-	color:#000;
-	}	
+  color: #000;
+}
 .cart_div span {
-	font-size: 12px;
-	line-height: 14px;
-	background: #F68B1E;
-	padding: 2px;
-	border: 2px solid #fff;
-	border-radius: 50%;
-	position: absolute;
-	top: -1px;
-	left: 13px;
-	color: #fff;
-	width: 20px;
-	height: 20px;
-	text-align: center;
-	}
+  font-size: 12px;
+  line-height: 14px;
+  background: #f68b1e;
+  padding: 2px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: -1px;
+  left: 13px;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
 
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
 @media screen and (max-width: 600px) {
-    h1 {
-      font-size: 15vw;
-    }
+  h1 {
+    font-size: 15vw;
   }
+}
 
 /* INDEX AND CHILD PAGES*/
 .banner {
-    width: 100%;
-    margin: 0 auto 0 auto;
-    display: block;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  display: block;
 }
 
 .productThumb {
-    box-shadow: 10px 15px 25px 0 rgba(0,0,0,.2);
+  box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.2);
 }
 
 .productThumb:hover {
-    box-shadow: 5px 7.5px 12.5px 0 rgba(0,0,0,.2);
+  box-shadow: 5px 7.5px 12.5px 0 rgba(0, 0, 0, 0.2);
 }
 
 #wrapper {
-    width: 900px;
-    margin: 0 auto 0 auto;
-    height: 100%;
+  width: 900px;
+  margin: 0 auto 0 auto;
+  height: 100%;
 }
 
 .productImg {
-    width: 550px;
-
+  width: 550px;
 }
 
 /* USER PAGES */
 
 .pointsRed {
-    color: #b02e2e;
+  color: #b02e2e;
 }
-
 
 /* CHECKOUT */
 .payment-info {
-    background: rgb(155, 187, 199);
-    padding: 10px;
-    border-radius: 6px;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  .product-details {
-    padding: 10px;
-  }
-  
-  .cart {
-    background: #fff;
-  }
-  
-  .p-about {
-    font-size: 12px;
-  }
-  
-  .table-shadow {
-    -webkit-box-shadow: 5px 5px 15px -2px rgba(0,0,0,0.42);
-    box-shadow: 5px 5px 15px -2px rgba(0,0,0,0.42);
-  }
-  
-  .type {
-    font-weight: 400;
-    font-size: 10px;
-  }
-  
-  label.radio input:checked + span {
-    border-color: #fff;
-    background-color: rgb(153, 181, 197);
-    color: #fff;
-  }
-  
-  .credit-inputs {
-    background: rgb(102,102,221);
-    color: black !important;
-    border-color: rgb(102,102,221);
-  }
-  
-  .credit-inputs::placeholder {
-    color: #fff;
-    font-size: 13px;
-  }
-  
-  .credit-card-label {
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 5px;
-  }
-  
-  .form-control.credit-inputs:focus {
-    background: rgb(102,102,221);
-    border: rgb(102,102,221);
-  }
-  
-  .line {
-    border-bottom: 1px solid rgb(102,102,221);
-  }
-  
-  .information span {
-    font-size: 12px;
-    font-weight: 500;
-  }
-  
-  .information {
-    margin-bottom: 5px;
-  }
-  
-  .items {
-    -webkit-box-shadow: 5px 5px 4px -1px rgba(0,0,0,0.25);
-    box-shadow: 5px 5px 4px -1px rgba(0, 0, 0, 0.08);
-  }
-  
-  .spec {
-    font-size: 11px;
-  }
+  background: rgb(155, 187, 199);
+  padding: 10px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.product-details {
+  padding: 10px;
+}
+
+.cart {
+  background: #fff;
+}
+
+.p-about {
+  font-size: 12px;
+}
+
+.table-shadow {
+  -webkit-box-shadow: 5px 5px 15px -2px rgba(0, 0, 0, 0.42);
+  box-shadow: 5px 5px 15px -2px rgba(0, 0, 0, 0.42);
+}
+
+.type {
+  font-weight: 400;
+  font-size: 10px;
+}
+
+label.radio input:checked + span {
+  border-color: #fff;
+  background-color: rgb(153, 181, 197);
+  color: #fff;
+}
+
+.credit-inputs {
+  background: rgb(102, 102, 221);
+  color: black !important;
+  border-color: rgb(102, 102, 221);
+}
+
+.credit-inputs::placeholder {
+  color: #fff;
+  font-size: 13px;
+}
+
+.credit-card-label {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 5px;
+}
+
+.form-control.credit-inputs:focus {
+  background: rgb(102, 102, 221);
+  border: rgb(102, 102, 221);
+}
+
+.line {
+  border-bottom: 1px solid rgb(102, 102, 221);
+}
+
+.information span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.information {
+  margin-bottom: 5px;
+}
+
+.items {
+  -webkit-box-shadow: 5px 5px 4px -1px rgba(0, 0, 0, 0.25);
+  box-shadow: 5px 5px 4px -1px rgba(0, 0, 0, 0.08);
+}
+
+.spec {
+  font-size: 11px;
+}
