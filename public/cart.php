@@ -4,11 +4,6 @@
     require('checkout.php');
 
 
-    $userID =  $_SESSION['id'];
-
-    $sql = "SELECT * FROM users WHERE id=$userID";
-    $stmt = $dbconnect->query($sql);
-    $user = $stmt->fetch();
 
 // If the user clicked the add to cart button on the product page we can check for the form data
 if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['product_id']) && is_numeric($_POST['quantity'])) {
@@ -37,9 +32,6 @@ if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['produc
             $_SESSION['cart'] = array($product_id => $quantity);
         }
     }
-    // Prevent form resubmission...
-    header('location: index.php?page=cart');
-    exit;
 }
 
 // Update product quantities in cart if the user clicks the "Update" button on the shopping cart page
@@ -71,9 +63,7 @@ $subtotal = 0.00;
 
 if ($products_in_cart) {
 
-    
-    // There are products in the cart so we need to select those products from the database
-    // Products in cart array to question mark string array, we need the SQL statement to include IN (?,?,?,...etc)
+
     $array_to_question_marks = implode(',', array_fill(0, count($products_in_cart), '?'));
     $stmt = $dbconnect->prepare('SELECT * FROM products WHERE id IN (' . $array_to_question_marks . ')');
     // We only need the array keys, not the values, the keys are the id's of the products
@@ -89,11 +79,23 @@ if ($products_in_cart) {
     $totalPrice = $subtotal + 20;
 }
 
+if (isset($_SESSION['id'])) {
+    $userID =  $_SESSION['id'];       
+} else {
+    $userID = 0;
+}
+
+$sql = "SELECT * FROM users WHERE id=$userID";
+$stmt = $dbconnect->query($sql);
+$user = $stmt->fetch();  
+
 ?>
 
 <?=template_header('cart')?>
-<?php if (empty($products)): ?>
+<?php if (empty($products) && $_GET['msg'] == ""):?>
     <h1>Här var det tomt!</h1>
+<?php elseif ($_GET['msg'] == "success"): ?>
+    <h1>Thanks for your order!</h1>
 <?php else: ?>
     <form action="cart.php" method="post">
     <div class="container mt-5 p-3 rounded cart">
@@ -123,17 +125,21 @@ if ($products_in_cart) {
                 <div class="payment-info">
                 
                     <div class="d-flex justify-content-between align-items-center"><span>Shipping details</span></div>
-
-                    <div><label class="credit-card-label"><?=$user['first_name']?> <?=$user['last_name']?></label></div>
-                    <div><label class="credit-card-label"><?=$user['street']?></label></div>
-                    <div><label class="credit-card-label"><?=$user['postal_code']?></label></div>
-                    <div><label class="credit-card-label"><?=$user['city']?></label></div>
-
+                    <?php if ($userID > 0): ?>
+                    <div><label class="adress-label"><?=$user['first_name']?> <?=$user['last_name']?></label></div>
+                    <div><label class="adress-label"><?=$user['street']?></label></div>
+                    <div><label class="adress-label"><?=$user['postal_code']?></label></div>
+                    <div><label class="adress-label"><?=$user['city']?></label></div>
+                    <?php  else: ?>
+                        <div><a href# data-bs-toggle=modal data-bs-target=#loginModal class="linkEffect"><button>Login</button></a></div>
+                    <?php endif; ?>
                     <hr class="line">
                     <div class="d-flex justify-content-between information"><span>Subtotal</span><span>$<?=$subtotal?></span></div>
                     <div class="d-flex justify-content-between information"><span>Shipping</span><span>$20.00</span></div>
                     <div class="d-flex justify-content-between information"><span>Total(Incl. taxes)</span><span>$<?=$totalPrice?></span></div>
-                
+                    
+                    <input type="hidden" name="totalprice" value="<?=$totalPrice?>">
+                   
                     <input class="btn btn-light btn-block d-flex justify-content-between mt-3" type="submit" value="Update" name="update">
                     <input class="btn btn-light btn-block d-flex justify-content-between mt-3" type="submit" value="Place Order" name="placeorder">
                 </form>

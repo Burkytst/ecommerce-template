@@ -16,6 +16,10 @@ $user = $stmt->fetch();
 
 $pointsLeft = 2000 - $user['points'];
 
+$sql = "SELECT * FROM orders WHERE user_id = 3";
+$stmt = $dbconnect->query($sql);
+$orders = $stmt->fetchAll();
+
 ?>
 
 <?=template_header('Account')?>
@@ -50,35 +54,24 @@ $pointsLeft = 2000 - $user['points'];
             <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">Number</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Order number</th>
+                    <th scope="col">Total price</th>
+                    <th scope="col">Date ordered</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($orders as $order): ?>                   
                     <tr>
-                    <th scope="row">134242</th>
-                    <td>2022-01-14</td>
-                    <td>In transit</td>
+                        <th scope="row"><?=$order['id']?></th>
+                        <td><?=$order['total_price']?></td>
+                        <td><?=$order['create_date']?></td>
                     </tr>
-                    <tr>
-                    <th scope="row">2454353</th>
-                    <td>1979-12-22</td>
-                    <td>Delivered</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">35435345</th>
-                    <td>1978-02-20</td>
-                    <td>Delivered</td>
-                    </tr>
+                    <?php endforeach; ?>
+    
                 </tbody>
             </table>
         </div>
     </div>
-    
-        <div class="col mb-4 mt-3 mb-lg-0">
-            <h2>Returns</h2>
-        </div>
     </div>
 </div>
 <script>
