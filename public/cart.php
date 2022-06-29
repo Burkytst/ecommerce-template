@@ -108,8 +108,9 @@ if ($products_in_cart) {
                             <div class="ml-2"><span class="font-weight-bold d-block"><?=$product['title']?></span></div>
                         </div>
 
-                        <div class="d-flex flex-row align-items-center"><span class="d-block"><?=$product['price']?></div>
-                        <div class="d-flex flex-row align-items-center"><span class="d-block"><input type="number" name="quantity-<?=$product['id']?>" value="<?=$products_in_cart[$product['id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required> </span><span class="d-block ml-5 font-weight-bold">&nbsp;$<?=$product['price'] * $products_in_cart[$product['id']]?></span></div>
+                        <div class="d-flex flex-row align-items-center"><span class="d-block">$<?=$product['price']?></div>
+                        <div class="d-flex flex-row align-items-center"><span class="d-block"><input type="number" name="quantity-<?=$product['id']?>" value="<?=$products_in_cart[$product['id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required> </span>
+                        <span class="d-block ml-5 font-weight-bold">&nbsp;$<?=$product['price'] * $products_in_cart[$product['id']]?></span></div>
                     </div>
 
         <?php endforeach; ?>
@@ -121,7 +122,7 @@ if ($products_in_cart) {
                 
                     <div class="d-flex justify-content-between align-items-center"><span>Shipping details</span></div>
 
-                    <div><label class="credit-card-label"><?=$user['first_name']?><?=$user['last_name']?></label></div>
+                    <div><label class="credit-card-label"><?=$user['first_name']?> <?=$user['last_name']?></label></div>
                     <div><label class="credit-card-label"><?=$user['street']?></label></div>
                     <div><label class="credit-card-label"><?=$user['postal_code']?></label></div>
                     <div><label class="credit-card-label"><?=$user['city']?></label></div>
@@ -131,8 +132,8 @@ if ($products_in_cart) {
                     <div class="d-flex justify-content-between information"><span>Shipping</span><span>$20.00</span></div>
                     <div class="d-flex justify-content-between information"><span>Total(Incl. taxes)</span><span>$<?=$totalPrice?></span></div>
                 
-                    <input class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="submit" value="Update" name="update">
-                    <input class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="submit" value="Place Order" name="placeorder">
+                    <input class="btn btn-light btn-block d-flex justify-content-between mt-3" type="submit" value="Update" name="update">
+                    <input class="btn btn-light btn-block d-flex justify-content-between mt-3" type="submit" value="Place Order" name="placeorder">
                 </form>
                 </div>
             </div>

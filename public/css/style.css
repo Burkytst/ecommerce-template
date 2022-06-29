@@ -158,29 +158,6 @@ nav a {
     font-size: 10px;
   }
   
-  label.radio {
-    cursor: pointer;
-  }
-  
-  label.radio input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-  
-  label.radio span {
-    padding: 1px 12px;
-    border: 2px solid #ada9a9;
-    display: inline-block;
-    color: #8f37aa;
-    border-radius: 3px;
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 300;
-  }
-  
   label.radio input:checked + span {
     border-color: #fff;
     background-color: rgb(153, 181, 197);
@@ -189,7 +166,7 @@ nav a {
   
   .credit-inputs {
     background: rgb(102,102,221);
-    color: #black !important;
+    color: black !important;
     border-color: rgb(102,102,221);
   }
   
