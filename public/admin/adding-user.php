@@ -46,9 +46,6 @@ if (isset($_POST['addUserBtn'])) {
 
   	$sql = "INSERT INTO users (phone, email, password, first_name, last_name, street, postal_code, city, country, create_date, admin) 
   			  VALUES('$phone', '$email', '$password', '$first_name', '$last_name', '$street', '$postal_code', '$city', '$country', '$create_date', '$admin')";
-    
-
-    echo print_r($sql);
 
     $stmt = $dbconnect->prepare($sql);
     $stmt -> bindParam(':first_name', $first_name);
