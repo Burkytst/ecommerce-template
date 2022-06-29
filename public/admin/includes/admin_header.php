@@ -38,26 +38,4 @@
 
 
 
-
-<!-- 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-      <a class="navbar-brand mr-1" href="../">Admin Page</a>
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">Home
-      </button>
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="../products.php">Products
-      </button>
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="../admin-users/admin-users.php">Users
-      </button>
-      <button class="btn btn-link btn-sm text-light order-1 order-sm-0" id="sidebarToggle" href="#">Shop
-      </button>
-
-
-      <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <a class="nav-link" href="#">
-            <span>Log Out</span>   <i class="fas fa-sign-out-alt"></i>
-         
-</nav> -->
-
-
 </body>

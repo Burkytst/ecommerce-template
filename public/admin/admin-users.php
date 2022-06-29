@@ -88,21 +88,19 @@ $users = $stmt->fetchAll();
     <th>ID</th>
     <th>Name</th>
     <th>Email</th>
-    <th>Country</th>
+    <th>Admin</th>
     <th>Creation Date</th>
     <th>Actions</th>
 </tr>
 </thead>
-<tbody>
-
-                
+<tbody>             
             
 <tr>
 <?php foreach($users as $user)  {  ?> 
 <td><?=htmlentities($user['id'])?></td>
 <td><?=htmlentities($user['first_name'])?></td>
 <td><?=htmlentities($user['email'])?></td>
-<td><?=htmlentities($user['country'])?></td>
+<td><?=htmlentities($user['admin'])?></td>
 <td><?=htmlentities($user['create_date'])?></td>
                        
 <td>

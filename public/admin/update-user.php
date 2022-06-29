@@ -120,7 +120,7 @@ if ($error) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="../css/sb-admin-2.css"></head>
+  <link rel="stylesheet" href="css/sb-admin-2.css"></head>
 <body class="m-3">
 
 <h2 class="display-4">Update User</h2>
@@ -178,6 +178,12 @@ if ($error) {
       <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm password">
     </div>
   </div>
+  </div>
+
+
+  <div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Admin</label>
   </div>
   
   <div class="form-group">

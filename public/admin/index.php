@@ -1,6 +1,14 @@
 <?php
 	require('../../src/config.php');
     require('../../src/dbconnect.php');
+
+    if (!isset($_SESSION['loggedin'])) {
+
+        header('Location: index.html');
+        
+        exit;
+        
+        }
 ?>
 
 
@@ -25,7 +33,7 @@
 </head>
 <body>
 
-
+<p>Welcome, <?=$_SESSION['name']?>!</p>
     
 </body>
 </html>
