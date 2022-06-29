@@ -1,6 +1,8 @@
 <?php
 	require('../../../src/config.php');
     require('../../../src/dbconnect.php');
+    
+    include "../includes/admin_header.php";
 
 
 // ------------------ DELETE ------------------
@@ -38,7 +40,12 @@ $users = $stmt->fetchAll();
 
 // -------------------
 
+
+
 ?>
+
+
+
 
 
 
