@@ -127,13 +127,21 @@ if (isset($_POST['addUserBtn'])) {
   <link rel="stylesheet" href="css/sb-admin-2.css">
 
 </head>
-<body class="m-3">
+<body>
 
+<?php include "includes/admin_header.php"; ?>
+
+    <div id="wrapper">
+
+<?php include "includes/admin_sidebar.php"; ?>
+
+<div id="content-wrapper" class="pt-3">
+    <div class="container-fluid m-3 mt-3">
 <h2 class="display-4">Add New User</h2>
 
 <?=$message?>
 
-<form action="" method="POST">
+<form action="" method="POST" class="pr-3">
 <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">First name</label>
@@ -172,8 +180,7 @@ if (isset($_POST['addUserBtn'])) {
       <input type="text" class="form-control" name="postal_code" id="inputPostal">
     </div>
 </div>
-</div>
-  <div class="form-row">
+<div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Password</label>
       <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
@@ -183,21 +190,22 @@ if (isset($_POST['addUserBtn'])) {
       <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm password">
     </div>
   </div>
-  </div>
 
   <div class="form-check mb-3">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Admin</label>
-  </div>
-  
-  <div class="form-group">
-
+</div>
+<div class="form-group">
 <input type="submit" class="btn btn-primary" name="addUserBtn" value="Add User">
 <a href="admin-users.php" class="btn btn-primary" role="button">Go back</a>
+  </div>
+</div>
 
 
+</div>
 
 </div>
 </form>
 </body>
 </html>
+<?php include "includes/admin_footer.php"; ?>
