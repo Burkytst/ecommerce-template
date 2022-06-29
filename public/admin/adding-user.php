@@ -89,6 +89,8 @@ if (isset($_POST['addUserBtn'])) {
  
     $password = password_hash($password_1, PASSWORD_DEFAULT);
 
+    // if ($_POST['admin'] == 'adminValue'){}
+
         $sql = " INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country, admin)
         VALUES (:first_name, :last_name, :email, :password, :phone, :street, :postal_code, :city, :country :admin);
     ";
@@ -192,7 +194,7 @@ if (isset($_POST['addUserBtn'])) {
   </div>
 
   <div class="form-check mb-3">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="admin" value="adminValue">
     <label class="form-check-label" for="exampleCheck1">Admin</label>
 </div>
 <div class="form-group">
