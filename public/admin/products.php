@@ -180,6 +180,9 @@
                                     <input type="hidden" name="form_type" value="add">
                                     <input type="submit" class="btn btn-primary" name="add_product" value="Add Product">
                                 </div>
+                                <div class="form-group">
+                                            <div id="formInfoAdd" class=" hide alert"></div>
+                                        </div>
                             </form>
                         </div>
                     </div>
@@ -192,9 +195,35 @@
         window.addEventListener('submit',function(e){
             if(e.submitter.name === "edit_product"){
                 e.preventDefault();
+                let _body = new FormData(e.target);
+               
+                if (_body.get("title") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type product title in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("description") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type description in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("price") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type product price in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("stock") == ""){
+                document.getElementById("formInfo"+_body.get("id")).classList.add("alert-danger");
+                        document.getElementById("formInfo"+_body.get("id")).innerText="Please type stock in the form";
+                        document.getElementById("formInfo"+_body.get("id")).classList.remove("hide","alert-success");
+                    return;
+                }
                 fetch('productsDb.php', {
                     method: 'POST',
-                    body: new FormData(e.target),
+                    body: _body,
                 }).then(function (response) {
                     if (response.ok) {
                         return response.json();
@@ -221,6 +250,8 @@
                 }
                 })
 
+                
+
 
             }
             if(e.submitter.name==="delete_product"){
@@ -244,9 +275,35 @@
             }
             if(e.submitter.name==="add_product"){
                 e.preventDefault();
+                let _body = new FormData(e.target);
+                
+                if (_body.get("title") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type product title in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("description") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type description in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("price") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type product price in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
+                if (_body.get("stock") == ""){
+                document.getElementById("formInfoAdd").classList.add("alert-danger");
+                        document.getElementById("formInfoAdd").innerText="Please type stock in the form";
+                        document.getElementById("formInfoAdd").classList.remove("hide","alert-success");
+                    return;
+                }
                 fetch('productsDb.php', {
                     method: 'POST',
-                    body: new FormData(e.target),
+                    body: _body,
                 }).then(function (response) {
                     if (response.ok) {
                         return response.json();
