@@ -10,8 +10,10 @@
     <meta name="author" content="">
 
     <title>Admin Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- TOO MUCH CSS INTERFEARING WITH EACH OTHER -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
   </head>
@@ -28,23 +30,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../products.php">Products</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="admin-users/admin-users.php">Users</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Shop</a>
-      </li>
       <li>
-      <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <a class="nav-link" href="#">
-            <span>Log Out</span>   <i class="fas fa-sign-out-alt"></i>
-</li></ul>
+      <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 ">
+      <a class="nav-link float-right"href=../../src/logout.php>Log Out</a><i class="fas fa-sign-out-alt"></i>
   </div>
 </nav>
 
