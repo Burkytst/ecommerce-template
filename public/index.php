@@ -19,12 +19,12 @@
   <meta charset="UTF-8">
   <title>CodePen - Popular Products Section Using HTML , CSS , Bootstrap</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/indexstyle.css">
+  
 </head>
 <body class="col-12">
 					
 							<div class="text-center">
-										<h3>Populare Products</h3>
+										<h3 class="text-color">Populare Products</h3>
 										<h2>Which one is your favourite?</h2></div>
 	
 					
@@ -42,9 +42,7 @@
                 </div>
             </div>
             <div class="stats mt-2">
-                <div class="d-flex justify-content-between p-price m-1"><span>Pro Display XDR</span><span><?=$product["price"]?> </span></div>
-                <div class="d-flex justify-content-between p-price m-1"><span>Pro stand</span></div>
-                <div class="d-flex justify-content-between p-price m-1"><span>In stock: <?=$product["stock"]?></span></div>
+                <div class="d-flex justify-content-between p-price m-1"><span>In stock:</span><span><?=$product["stock"]?> </span></div>
             </div>
             <div class="d-flex justify-content-between total font-weight-bold mt-4"><span>Total</span><span><?=$product["price"]?> SEK</span></div>
         </div>

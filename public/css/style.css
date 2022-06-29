@@ -27,8 +27,12 @@ p {
 
 .logo {
   font-size: 8vw;
-  color: black;
+  color: #5a5c69;
   text-decoration: none !important;
+}
+
+.text-color {
+  color: #5a5c69;
 }
 
 .logo a {
@@ -37,6 +41,26 @@ p {
 
 .orange {
   color: #f59442;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #f59542;
+  border-color: #f59542;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #f9b982;
+  border-color: #f9b982;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  color: #fff;
+  background-color: #ffa95f;
+  border-color: #f9b982;
+  box-shadow: 0 0 0 0.2rem rgba(139, 91, 19, 0.5);
 }
 
 nav {

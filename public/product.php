@@ -22,9 +22,9 @@
 		<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
 				<img src="img/products/<?=$product['img_url']?>" class="productImg">
                 <h1><?=$product['title']?></h1>
-                <?=$product['description']?>
+                <h4><?=$product['description']?></h4>
                 <form action="cart.php" method="post">
-                    <input type="number" name="quantity" value="1" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required>
+                    <input type="number" name="quantity" value="1" min="1" max="<?=$product['stock']?>" placeholder="Quantity" required>
                     <input type="hidden" name="product_id" value="<?=$product['id']?>">
                     <input type="submit" value="Add To Cart">
                 </form>

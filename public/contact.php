@@ -3,7 +3,12 @@
 ?>
 
 <?=template_header('Contact')?>
+<head>
+<link rel="stylesheet" href="css/style.css">
 
+</head>
+
+<body class="col-12">
 <!--Section: Contact v.2-->
 <section class="mb-4">
 
@@ -81,15 +86,15 @@
         <!--Grid column-->
         <div class="col-md-3 text-center">
             <ul class="list-unstyled mb-0">
-                <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                <li><i class="text-color fas fa-map-marker-alt fa-2x"></i>
                     <p>San Francisco, CA 94126, USA</p>
                 </li>
 
-                <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                <li><i class="text-color fas fa-phone mt-4 fa-2x"></i>
                     <p>+ 01 234 567 89</p>
                 </li>
 
-                <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                <li><i class="text-color fas fa-envelope mt-4 fa-2x"></i>
                     <p>contact@sibarsnkr.com</p>
                 </li>
             </ul>
@@ -99,6 +104,7 @@
     </div>
 
 </section>
+</body>
 <!--Section: Contact v.2-->
 
 <?=template_footer()?>
