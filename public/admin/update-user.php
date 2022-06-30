@@ -20,6 +20,7 @@ $city            = "";
 $country         = "";
 $password        = "";
 $confirmPassword = "";
+$admin           = "";
 
 
 if (isset($_POST['updateUserBtn'])) {
@@ -33,6 +34,7 @@ if (isset($_POST['updateUserBtn'])) {
     $country         = trim($_POST['country']);
     $password        = trim($_POST['password']);
     $confirmPassword = trim($_POST['confirmPassword']);
+    $admin          = trim($_POST['admin']);
 
 
 if (empty($first_name)){
@@ -82,7 +84,7 @@ if ($error) {
       $message = '<div class="alert alert-success" role="alert"> Success! You have updated the user! </div>';
 
       $sql = "UPDATE users
-      SET first_name = :first_name, last_name = :last_name, email = :email, phone =:phone, street =:street, postal_code =:postal_code, city =:city, country =:country, password =:password 
+      SET first_name = :first_name, last_name = :last_name, email = :email, phone =:phone, street =:street, postal_code =:postal_code, city =:city, country =:country, password =:password, admin =:admin 
       WHERE id = :id";
 
       $stmt = $dbconnect->prepare($sql);
@@ -96,6 +98,7 @@ if ($error) {
       $stmt -> bindParam(':postal_code', $postal_code);
       $stmt -> bindParam(':city', $city);
       $stmt -> bindParam(':country', $country);
+      $stmt -> bindParam(':admin', $admin);
       $stmt->execute();
     
   }
@@ -189,8 +192,8 @@ if ($error) {
   </div>
 
   <div class="form-check mb-3">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Admin</label>
+    <input type="radio" name="admin" id="customer" value="0">Customer<br>
+    <input type="radio" name="admin" id="admin" value="1">Admin<br>
   </div>
   
   <div class="form-group">
