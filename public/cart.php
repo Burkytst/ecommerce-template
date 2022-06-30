@@ -151,7 +151,9 @@ $user = $stmt->fetch();
                     <input type="hidden" name="totalprice" value="<?=$totalPrice?>">
                    
                     <input class="btn btn-light btn-block d-flex justify-content-between mt-3" type="submit" value="Update" name="update">
-                    <input class="btn btn-light btn-block d-flex justify-content-between mt-3" type="submit" value="Place Order" name="placeorder">
+                    <?php if (  isset($_SESSION['loggedin'])) { ?>
+                        <input class="btn btn-light btn-block d-flex justify-content-between mt-3" type="submit" value="Place Order" name="placeorder">
+                    <?php } ?>
                 </form>
                 </div>
             </div>
